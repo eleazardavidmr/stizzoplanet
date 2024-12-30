@@ -17,7 +17,7 @@ export function Product({ data }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         onClick={() => showProduct()}
         className="product rounded-xl px-8 py-5 items-center w-full backdrop-blur-sm transition-all mx-auto md:w-[300px] lg:w-[350px] cursor-pointer"
       >

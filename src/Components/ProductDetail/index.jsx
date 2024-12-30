@@ -14,9 +14,9 @@ export function ProductDetail() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             key="box"
-            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 h-auto py-6 z-[99] w-[90vw] rounded-lg p-2 mx-auto overflow-auto md:w-[90vw] md:left-[3%]  md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 "
+            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden py-6 z-[99] w-[90vw] h-[90vh] rounded-lg p-2 mx-auto overflow-auto md:w-[90vw] md:left-[3%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto]"
           >
-            <div className="flex items-center justify-between w-full px-8 lg:py-5">
+            <div className="flex items-center justify-between w-full px-8 lg:py-5 ">
               <h1 className="font-semibold text-2xl">Detalle</h1>
 
               <motion.span
@@ -49,19 +49,23 @@ export function ProductDetail() {
                 className="w-[80%] mx-auto md:w-[50%] aspect-[500/500] "
               />
 
-              <div className="flex flex-col md:w-[40%] m-auto">
-                <div className="flex items-center justify-between gap-5">
-                  <p className="font-regular text-xl">
-                    {context.productToShow.title}
-                  </p>
-                  <p className="font-extrabold text-2xl">
-                    ${context.productToShow.price}
-                  </p>
-                </div>
+              <div className="flex flex-col md:w-[40%] m-auto w-[85%] gap-x-5">
+                <div className="flex items-center justify-between gap-8">
+                  <div className="flex flex-col gap-2">
+                    <span className="flex w-full items-center justify-between">
+                      <p className="font-regular text-xl">
+                        {context.productToShow.title}
+                      </p>
+                      <p className="font-extrabold text-2xl">
+                        ${context.productToShow.price}
+                      </p>
+                    </span>
 
-                <p className="text-white/60 text-center md:text-left">
-                  {context.productToShow.desc}
-                </p>
+                    <p className="text-white/60 md:text-left">
+                      {context.productToShow.desc}
+                    </p>
+                  </div>
+                </div>
                 <br />
                 <div className="flex flex-col gap-5 text-center text-white/60 md:text-left">
                   <div className="flex flex-col md:flex-row items-center ">

@@ -8,7 +8,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-screen h-[90vh] text-center mx-auto flex-col gap-10 flex items-center justify-center md:flex-row md:justify-between mt-[13vh] md:mt-[10vh] md:w-[80vw] md:text-left"
+        className="w-screen h-[90vh] text-center mx-auto flex-col gap-10 flex items-center  justify-center md:flex-row md:justify-between mt-[13vh] md:w-[80vw] md:text-left"
       >
         <motion.span className="flex flex-col md:text-3xl w-full text-3xl font-semibold text-white">
           Bienvenido a
@@ -27,7 +27,7 @@ export function Hero() {
         <motion.img
           src={cerezas}
           alt="logo"
-          className="mx-auto w-[73vw] md:w-[30vw]"
+          className="mx-auto w-max-[70%] md:w-[70%]"
         />
       </motion.section>
     </>
