@@ -14,12 +14,9 @@ export function Product({ data }) {
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
+      <div
         onClick={() => showProduct()}
-        className="product rounded-xl px-8 py-5 items-center w-full backdrop-blur-sm transition-all mx-auto md:w-[300px] lg:w-[350px] cursor-pointer"
+        className="product rounded-xl px-8 py-5 items-center w-full backdrop-blur-sm transition-all hover:scale-[1.05] mx-auto md:w-[300px] lg:w-[350px] cursor-pointer"
       >
         <img className="w-full" src={data.img} alt={data.title} />
         <div className="">
@@ -41,7 +38,7 @@ export function Product({ data }) {
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }

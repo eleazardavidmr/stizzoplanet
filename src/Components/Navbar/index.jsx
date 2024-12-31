@@ -52,7 +52,7 @@ export function Navbar() {
 
           <div className="hidden  lg:flex md:flex lg:w-[70%] items-center justify-center gap-10">
             <div>
-              <Link to="/productos">
+              <Link to="/">
                 <NavbarButton content="Productos" />
               </Link>
             </div>
