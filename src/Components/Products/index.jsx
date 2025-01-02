@@ -36,7 +36,7 @@ export function Products() {
   ];
   return (
     <>
-      <div className="flex w-[90vw] flex-col my-5 md:flex-row lg:w-[70vw] items-center justify-center gap-10 flex-wrap p-0 mx-auto">
+      <div className="flex w-[90vw] flex-col my-5 md:flex-row lg:w-[60%] items-center justify-center gap-10 flex-wrap p-0 mx-auto">
         {PRODUCTS.map((product) => {
           return <Product key={product.title} data={product} />;
         })}

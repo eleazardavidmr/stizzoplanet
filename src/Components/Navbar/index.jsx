@@ -1,17 +1,25 @@
+//app
 import logo from "/img/stizzo-letters.png";
-import Hamburger from "hamburger-react";
-import { useState, useEffect } from "react";
 import { NavbarButton } from "./NavbarButton";
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
+import { ProductContext } from "../Context";
 import "./styles.css";
 
+//react
+import { useState, useEffect, useContext } from "react";
+import Hamburger from "hamburger-react";
+import { Link } from "react-router-dom";
+
+//famer motion
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+
+//logos
 import { InstagramLogo } from "../../Icons/InstagramLogo";
 import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
 import { TikTokLogo } from "../../Icons/TikTokLogo";
-import { Link } from "react-router-dom";
 
 export function Navbar() {
+  const context = useContext(ProductContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const handleToggle = (toggled) => {
     setMenuOpen(toggled);
@@ -42,15 +50,75 @@ export function Navbar() {
         <div className="flex items-center justify-between w-full mx-auto lg:w-[80vw] md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-full">
             <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
-            <Hamburger
-              size={20}
-              label="show menu"
-              rounded
-              onToggle={handleToggle}
-            />
+            <div className="flex items-center justify-between gap">
+              <span className="text-black">
+                <button
+                  type="button"
+                  className="relative inline-flex items-center p-2 text-sm font-medium"
+                  onClick={() => context.openOrderCheck()}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 17h-11v-14h-2" />
+                    <path d="M6 5l14 1l-1 7h-13" />
+                  </svg>
+                  <motion.div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                    {context.count}
+                  </motion.div>
+                </button>
+              </span>
+              <Hamburger
+                size={20}
+                label="show menu"
+                rounded
+                onToggle={handleToggle}
+              />
+            </div>
           </span>
 
-          <div className="hidden  lg:flex md:flex lg:w-[70%] items-center justify-center gap-10">
+          <div className="hidden lg:flex md:flex lg:w-[70%] items-center justify-center gap-10">
+            <motion.button
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => context.openOrderCheck()}
+              type="button"
+              className="relative inline-flex items-center p-2 text-sm font-medium right-5 me-2 mb-2  hover:bg-primary text-white rounded-full"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                <path d="M17 17h-11v-14h-2" />
+                <path d="M6 5l14 1l-1 7h-13" />
+              </svg>
+              <motion.div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                {context.count}
+              </motion.div>
+            </motion.button>
             <div>
               <Link to="/">
                 <NavbarButton content="Productos" />
