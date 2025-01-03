@@ -1,21 +1,27 @@
 import PropTypes from "prop-types";
 import { ProductContext } from "../../Context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import "./styles.css";
 
 export function Product({ data }) {
   const context = useContext(ProductContext);
+  const [alertMessage, setAlertMessage] = useState(null);
 
   const showProduct = () => {
     context.openProductDetail();
     context.setProductToShow(data);
   };
 
+  const showAlert = (productTitle) => {
+    setAlertMessage(productTitle + " ");
+    setTimeout(() => setAlertMessage(null), 5000); // Oculta la alerta después de 3 segundos
+  };
+
   const addProductsToCart = (productToAdd) => {
     context.setCount(context.count + 1);
-    context.setCartProducts([...context.cartProducts, productToAdd]); // Agrega el producto al carrito
-    console.log(context.cartProducts);
+    context.setCartProducts([...context.cartProducts, productToAdd]);
+    showAlert(productToAdd.title);
   };
 
   const renderIcons = (id) => {
@@ -23,7 +29,7 @@ export function Product({ data }) {
       context.cartProducts.filter((product) => product.id === id).length > 0;
 
     if (isInCart) {
-      //CART-CHECK ICON------------------------------------------------------
+      // Ícono de carrito con check
       return (
         <button
           type="button"
@@ -39,7 +45,7 @@ export function Product({ data }) {
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-check"
+            className="icon icon-tabler icon-tabler-shopping-cart-check"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
@@ -50,6 +56,7 @@ export function Product({ data }) {
         </button>
       );
     } else {
+      // Ícono de carrito con plus
       return (
         <button
           onClick={() => addProductsToCart(data)}
@@ -66,7 +73,7 @@ export function Product({ data }) {
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-plus"
+            className="icon icon-tabler icon-tabler-shopping-cart-plus"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
@@ -82,6 +89,39 @@ export function Product({ data }) {
 
   return (
     <>
+      {alertMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[99] flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+          role="alert"
+        >
+          <div className="flex items-center justify-center gap-1 text-right">
+            <span className="font-semibold">{alertMessage}</span>
+            <span>ha sido agregado al carrito</span>
+            <button onClick={() => context.openOrderCheck()}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                width={20}
+                height={20}
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+      )}
+
       <div className="product rounded-xl items-center w-full backdrop-blur-sm transition-all mx-auto md:w-[300px] lg:w-[350px] cursor-pointer">
         <motion.img
           whileHover={{ scale: 1.05 }}
@@ -90,7 +130,7 @@ export function Product({ data }) {
           src={data.img}
           alt={data.title}
         />
-        <div className="flex p-5 items-center justify-between mx-auto mt-5 w-full  dark:border-gray-700 dark:bg-[#0b141d] rounded-b-lg">
+        <div className="flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div>
             <p className="text-xl font-semibold text-gray-400">{data.title}</p>
             <p className="text-3xl font-extrabold text-white">${data.price}</p>
@@ -117,9 +157,9 @@ export function Product({ data }) {
 
 Product.propTypes = {
   data: PropTypes.shape({
-    img: PropTypes.string.isRequired, // La imagen del producto es necesaria
-    title: PropTypes.string.isRequired, // El título del producto es necesario
-    id: PropTypes.number.isRequired, // El id del producto es necesario
-    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // El precio puede ser string o número (opcional si está fijo en el código)
-  }).isRequired, // Aseguramos que `data` sea obligatorio
+    img: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }).isRequired,
 };

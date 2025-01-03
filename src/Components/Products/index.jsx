@@ -8,6 +8,7 @@ export function Products() {
       desc: "N🔝KE V2K✔️ De nuevo disponible para hombre y dama 🤩 Haz tu pedido y te lo entregamos con domi gratis en Cali📍",
       sizes: [44, 42, 43],
       price: 999,
+      category: "dama",
     },
     {
       id: 2,
@@ -16,6 +17,7 @@ export function Products() {
       desc: "Air Max 97💨 Un modelo que no pasa de moda🔥 Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
       sizes: [30, 39, 44],
       price: 999,
+      category: "caballero",
     },
     {
       id: 3,
@@ -24,6 +26,7 @@ export function Products() {
       desc: "New B 327👨🏻☄️Tenemos variedad de colores☑️ Haz tu pedido por medio de WhatsApp, link en el perfil 📲",
       sizes: [44, 42, 41],
       price: 999,
+      category: "caballero",
     },
     {
       id: 4,
@@ -32,11 +35,12 @@ export function Products() {
       desc: "Un modelo clásico que no puede faltar🔝 Disponible para hombre y dama aquí en @stizzoplanet_ 🤩",
       sizes: [44, 42, 40],
       price: 999,
+      category: "dama",
     },
   ];
   return (
     <>
-      <div className="flex w-[90vw] flex-col my-5 md:flex-row lg:w-[60%] items-center justify-center gap-10 flex-wrap p-0 mx-auto">
+      <div className="flex flex-col gap-5 md:flex-row flex-wrap w-[90vw] mx-auto lg:w-[80%] mb-5">
         {PRODUCTS.map((product) => {
           return <Product key={product.title} data={product} />;
         })}

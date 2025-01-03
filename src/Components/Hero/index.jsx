@@ -2,6 +2,7 @@ import cerezas from "/img/hero-image.png";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 export function Hero() {
+  //className="underline underline-offset-3 decoration-8  dark:decoration-primary text-4xl font-extrabold text-primary-light dark:text-primary md:text-4xl lg:text-6xl "
   return (
     <>
       <motion.section
@@ -11,8 +12,10 @@ export function Hero() {
         className="w-screen h-[90vh] text-center mx-auto flex-col gap-10 flex items-center  justify-center md:flex-row md:justify-between mt-[13vh] md:w-[80vw] md:text-left"
       >
         <motion.span className="flex flex-col md:text-3xl w-full text-3xl font-semibold text-white">
-          Bienvenido a
-          <span className="text-4xl font-extrabold text-primary-light dark:text-primary md:text-4xl lg:text-6xl ">
+          <span>
+            <span>Bienvenido a</span>
+          </span>
+          <span className="text-4xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-black">
             <Typewriter
               loop={5}
               cursor

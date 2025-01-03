@@ -44,8 +44,8 @@ export function Navbar() {
     <>
       <div
         className={` ${
-          isScrolled ? "backdrop-blur-2xl scrolled" : ""
-        } fixed z-50 top-0 left-0 flex transition-all items-center justify-between w-screen h-[13vh] px-8 py-5 md:justify-center `}
+          isScrolled ? "backdrop-blur-2xl scrolled h-[15vh]" : ""
+        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen h-[13vh] px-8 py-5 md:justify-center `}
       >
         <div className="flex items-center justify-between w-full mx-auto lg:w-[80vw] md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-full">
@@ -135,7 +135,7 @@ export function Navbar() {
               />
             </Link>
 
-            <div>
+            <div className="flex items-center justify-center">
               <a
                 href="https://www.instagram.com/stizzoplanet_/"
                 target="_blank"
