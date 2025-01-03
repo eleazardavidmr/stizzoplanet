@@ -122,15 +122,15 @@ export function Product({ data }) {
         </motion.div>
       )}
 
-      <div className="product rounded-xl items-center w-full backdrop-blur-sm transition-all mx-auto md:w-[300px] lg:w-[350px] cursor-pointer">
+      <div className="product flex flex-col mx-auto items-center md:w-[300px] lg:w-[350px] ">
         <motion.img
           whileHover={{ scale: 1.05 }}
           onClick={() => showProduct()}
-          className="w-full"
+          className="w-full cursor-pointer aspect-[500/500]"
           src={data.img}
           alt={data.title}
         />
-        <div className="flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
+        <div className=" flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div>
             <p className="text-xl font-semibold text-gray-400">{data.title}</p>
             <p className="text-3xl font-extrabold text-white">${data.price}</p>
