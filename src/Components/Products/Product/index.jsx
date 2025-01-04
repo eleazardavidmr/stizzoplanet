@@ -126,7 +126,7 @@ export function Product({ data }) {
         <motion.img
           whileHover={{ scale: 1.05 }}
           onClick={() => showProduct()}
-          className="w-full cursor-pointer aspect-[500/500]"
+          className="w-full cursor-pointer aspect-[500/500] rounded-xl"
           src={data.img}
           alt={data.title}
         />

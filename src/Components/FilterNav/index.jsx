@@ -31,8 +31,6 @@ export default function FilterNav() {
         </NavLink>
         <NavLink
           to="/caballero"
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.95 }}
           className={({ isActive }) => {
             return isActive
               ? "text-sm px-4 py-1.5  md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px] md:text-sm border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"

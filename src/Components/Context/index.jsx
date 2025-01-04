@@ -1,3 +1,4 @@
+import { desc } from "framer-motion/client";
 import { createContext, useState } from "react";
 
 export const ProductContext = createContext();
@@ -39,6 +40,15 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: ["dama", "caballero"],
+    },
+    {
+      id: 5,
+      img: "/img/products/nikeZoom.png",
+      title: "Nike Zoom",
+      desc: "Nike Zoom🔥 Un modelo que no puede faltar en tu colección👟 Disponible para hombre📍",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
     },
   ];
   //product details

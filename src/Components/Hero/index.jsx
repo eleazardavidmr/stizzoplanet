@@ -1,21 +1,19 @@
-import cerezas from "/img/hero-image.png";
+import logo from "/img/stizzo-shadowed-hd.png";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 export function Hero() {
-  //className="underline underline-offset-3 decoration-8  dark:decoration-primary text-4xl font-extrabold text-primary-light dark:text-primary md:text-4xl lg:text-6xl "
   return (
     <>
       <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-screen h-[90vh] text-center mx-auto flex-col gap-10 flex items-center  justify-center md:flex-row md:justify-between mt-[13vh] md:w-[80vw] md:text-left"
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7 }}
+        className="w-full h-max-screen mb-6 text-center mx-auto flex-col gap-10 flex items-center justify-center md:flex-row md:justify-between mt-[18vh] md:w-[80vw] md:text-left"
       >
-        <motion.span className="flex flex-col md:text-3xl w-full text-3xl font-semibold text-white">
-          <span>
-            <span>Bienvenido a</span>
-          </span>
-          <span className="text-4xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-black">
+        <motion.span className="flex flex-col w-full text-3xl font-semibold text-white">
+          <span className="text-xl font-semibold text-white">Bienvenido a</span>
+
+          <span className="text-4xl w-full md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-black">
             <Typewriter
               loop={5}
               cursor
@@ -28,9 +26,9 @@ export function Hero() {
         </motion.span>
 
         <motion.img
-          src={cerezas}
+          src={logo}
           alt="logo"
-          className="mx-auto w-max-[70%] md:w-[70%]"
+          className="w-[90%] mx-auto md:w-[50%] lg:w-[40%]"
         />
       </motion.section>
     </>
