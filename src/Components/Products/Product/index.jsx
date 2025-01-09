@@ -87,6 +87,33 @@ export function Product({ data }) {
     }
   };
 
+  const renderCategoryIcons = (category) => {
+    if (category === "caballero") {
+      return (
+        <span className="text-xs font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
+          Caballero
+        </span>
+      );
+    } else if (category === "dama") {
+      return (
+        <span className="text-xs font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
+          Dama
+        </span>
+      );
+    } else {
+      return (
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-xs font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
+            Caballero
+          </span>
+          <span className="text-xs font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
+            Dama
+          </span>
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       {alertMessage && (
@@ -132,6 +159,7 @@ export function Product({ data }) {
         />
         <div className=" flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div>
+            {renderCategoryIcons(data.category)}
             <p className="text-xl font-semibold text-gray-400">{data.title}</p>
             <p className="text-3xl font-extrabold text-white">${data.price}</p>
           </div>
