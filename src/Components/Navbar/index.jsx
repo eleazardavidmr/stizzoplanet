@@ -165,7 +165,7 @@ export function Navbar() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className=" w-[80%] h-[100px] z-[9999] backdrop-blur-2xl rounded-md fixed top-[20%] left-5 flex items-center justify-center"
+            className="top-15 w-full h-[100px] z-[9999] backdrop-blur-2xl rounded-md fixed flex items-center justify-center"
           >
             <a href="https://www.instagram.com/stizzoplanet_/" target="_blank">
               <NavbarButton
