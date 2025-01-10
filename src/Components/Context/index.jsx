@@ -11,7 +11,7 @@ export const ProductProvider = ({ children }) => {
       desc: "N🔝KE V2K✔️ De nuevo disponible para hombre y dama 🤩 Haz tu pedido y te lo entregamos con domi gratis en Cali📍",
       sizes: [44, 42, 43],
       price: 999,
-      category: "dama",
+      category: ["dama", "caballero"],
     },
     {
       id: 2,
@@ -38,7 +38,7 @@ export const ProductProvider = ({ children }) => {
       desc: "Un modelo clásico que no puede faltar🔝 Disponible para hombre y dama aquí en @stizzoplanet_ 🤩",
       sizes: [44, 42, 40],
       price: 999,
-      category: "dama",
+      category: ["dama", "caballero"],
     },
     {
       id: 5,

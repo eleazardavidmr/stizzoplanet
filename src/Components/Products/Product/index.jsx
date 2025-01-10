@@ -15,7 +15,7 @@ export function Product({ data }) {
 
   const showAlert = (productTitle) => {
     setAlertMessage(productTitle + " ");
-    setTimeout(() => setAlertMessage(null), 5000); // Oculta la alerta después de 3 segundos
+    setTimeout(() => setAlertMessage(null), 5000);
   };
 
   const addProductsToCart = (productToAdd) => {
@@ -25,11 +25,9 @@ export function Product({ data }) {
   };
 
   const renderIcons = (id) => {
-    const isInCart =
-      context.cartProducts.filter((product) => product.id === id).length > 0;
+    const isInCart = context.cartProducts.some((product) => product.id === id);
 
     if (isInCart) {
-      // Ícono de carrito con check
       return (
         <button
           type="button"
@@ -56,7 +54,6 @@ export function Product({ data }) {
         </button>
       );
     } else {
-      // Ícono de carrito con plus
       return (
         <button
           onClick={() => addProductsToCart(data)}
@@ -88,29 +85,27 @@ export function Product({ data }) {
   };
 
   const renderCategoryIcons = (category) => {
-    if (category === "caballero") {
-      return (
+    const categoryElements = {
+      caballero: (
         <span className="text-xs font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
           Caballero
         </span>
-      );
-    } else if (category === "dama") {
-      return (
+      ),
+      dama: (
         <span className="text-xs font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
           Dama
         </span>
-      );
-    } else {
+      ),
+    };
+
+    if (Array.isArray(category)) {
       return (
         <div className="flex items-center justify-center gap-2">
-          <span className="text-xs font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
-            Caballero
-          </span>
-          <span className="text-xs font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
-            Dama
-          </span>
+          {category.map((cat) => categoryElements[cat])}
         </div>
       );
+    } else {
+      return categoryElements[category];
     }
   };
 
@@ -149,7 +144,7 @@ export function Product({ data }) {
         </motion.div>
       )}
 
-      <div className="product flex flex-col mx-auto items-center md:w-[300px] lg:w-[350px] ">
+      <div className="product flex flex-col mx-auto items-center md:w-[300px] lg:w-[350px]">
         <motion.img
           whileHover={{ scale: 1.05 }}
           onClick={() => showProduct()}
@@ -157,7 +152,7 @@ export function Product({ data }) {
           src={data.img}
           alt={data.title}
         />
-        <div className=" flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
+        <div className="flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div>
             {renderCategoryIcons(data.category)}
             <p className="text-xl font-semibold text-gray-400">{data.title}</p>
@@ -188,6 +183,10 @@ Product.propTypes = {
     img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]).isRequired,
   }).isRequired,
 };
