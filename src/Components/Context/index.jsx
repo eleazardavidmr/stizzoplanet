@@ -6,7 +6,7 @@ export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
       id: 1,
-      img: "/img/products/nikeV2K.png",
+      img: ["/img/products/nikeV2K.png"],
       title: "Nike V2K",
       desc: "N🔝KE V2K✔️ De nuevo disponible para hombre y dama 🤩 Haz tu pedido y te lo entregamos con domi gratis en Cali📍",
       sizes: [44, 42, 43],
@@ -15,7 +15,7 @@ export const ProductProvider = ({ children }) => {
     },
     {
       id: 2,
-      img: "/img/products/airmax97.png",
+      img: ["/img/products/airmax97.png"],
       title: "Air Max 97",
       desc: "Air Max 97💨 Un modelo que no pasa de moda🔥 Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
       sizes: [30, 39, 44],
@@ -24,7 +24,7 @@ export const ProductProvider = ({ children }) => {
     },
     {
       id: 3,
-      img: "/img/products/newb327.png",
+      img: ["/img/products/newb327.png"],
       title: "New B 327",
       desc: "New B 327👨🏻☄️Tenemos variedad de colores☑️ Haz tu pedido por medio de WhatsApp, link en el perfil 📲",
       sizes: [44, 42, 41],
@@ -33,7 +33,7 @@ export const ProductProvider = ({ children }) => {
     },
     {
       id: 4,
-      img: "/img/products/reebook.png",
+      img: ["/img/products/reebook.png"],
       title: "Reebook",
       desc: "Un modelo clásico que no puede faltar🔝 Disponible para hombre y dama aquí en @stizzoplanet_ 🤩",
       sizes: [44, 42, 40],
@@ -42,9 +42,22 @@ export const ProductProvider = ({ children }) => {
     },
     {
       id: 5,
-      img: "/img/products/nikeZoom.png",
+      img: ["/img/products/nikeZoom.png"],
       title: "Nike Zoom",
       desc: "Nike Zoom🔥 Un modelo que no puede faltar en tu colección👟 Disponible para hombre📍",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+    },
+    {
+      id: 6,
+      img: [
+        "/img/products/offWhite/offwhite-green.png",
+        "/img/products/offWhite/offwhite-black.png",
+        "/img/products/offWhite/offwhite-white.png",
+      ],
+      title: "Off White",
+      desc: "Nuevas OFF White❕🧔🏽‍♂️ Mira nuestro catálogo, link en historias destacadas📲",
       sizes: [44, 42, 40],
       price: 999,
       category: "caballero",

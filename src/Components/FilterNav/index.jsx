@@ -5,13 +5,13 @@ export default function FilterNav() {
   const context = useContext(ProductContext);
   return (
     <>
-      <section className="w-[93%] mx-auto flex justify-between items-center mb-5 md:w-[40%] lg:w-[30%]">
+      <section className="w-[90vw] mx-auto flex justify-between items-center mb-5 md:w-[40%] lg:w-[25%]">
         <NavLink
           to="/dama"
           className={({ isActive }) => {
             return isActive
-              ? "text-sm px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px] md:text-sm me-2 mb-2 border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-              : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px] md:text-sm me-2 mb-2 border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+              ? "text-xs px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px]  me-2 mb-2 border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+              : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  me-2 mb-2 border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory("dama")}
         >
@@ -21,8 +21,8 @@ export default function FilterNav() {
           to="/"
           className={({ isActive }) => {
             return isActive
-              ? "text-sm px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px] md:text-sm border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-              : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px] md:text-sm border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+              ? "text-xs px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px]  border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+              : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory(null)}
         >
@@ -32,8 +32,8 @@ export default function FilterNav() {
           to="/caballero"
           className={({ isActive }) => {
             return isActive
-              ? "text-sm px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px] md:text-sm border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-              : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2  text-[12px] md:text-sm border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+              ? "text-xs px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px]  border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+              : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2  text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory("caballero")}
         >

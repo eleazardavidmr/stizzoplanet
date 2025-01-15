@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { totalPrice } from "../../Utils";
+import Carousel from "../Carousel";
 export function OrderCheck() {
   const context = useContext(ProductContext);
 
@@ -15,6 +16,34 @@ export function OrderCheck() {
     context.setCount(context.count - 1);
   };
 
+  /**
+                   
+   */
+
+  const renderProductImage = (product) => {
+    if (product.img.length === 1) {
+      return (
+        <img
+          src={product.img}
+          alt={product.title}
+          className="w-full mx-auto md:w-[40%] object-cover rounded-lg"
+        />
+      );
+    } else if (product.img.length > 1) {
+      return (
+        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 w-full">
+          {product.img.map((image, index) => (
+            <img
+              src={image}
+              alt={product.title}
+              key={index}
+              className="w-full mx-auto object-cover rounded-lg"
+            />
+          ))}
+        </Carousel>
+      );
+    }
+  };
   return (
     <>
       <AnimatePresence>
@@ -63,12 +92,8 @@ export function OrderCheck() {
                           key={index}
                           className="flex flex-col w-[90%] md:flex-row mx-auto rounded-lg p-0 border border-gray-300 dark:border-gray-700"
                         >
-                          <img
-                            src={product.img}
-                            alt={product.title}
-                            className="w-full mx-auto md:w-[40%] object-contain rounded-lg"
-                          />
-                          <div className="flex w-full p-3 h-full border-l border-gray-300 dark:border-gray-700 m-auto flex-col">
+                          {renderProductImage(product)}
+                          <div className="flex w-[80%] p-3 h-full border-l border-gray-300 dark:border-gray-700 m-auto flex-col">
                             <span className="flex justify-between items-center w-full mb-5">
                               <h1 className="text-md text-white/70">
                                 {product.title}

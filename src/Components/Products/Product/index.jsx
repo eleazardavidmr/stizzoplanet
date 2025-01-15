@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { ProductContext } from "../../Context";
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
+import Carousel from "../../Carousel";
 import "./styles.css";
 
 export function Product({ data }) {
@@ -87,12 +88,12 @@ export function Product({ data }) {
   const renderCategoryIcons = (category) => {
     const categoryElements = {
       caballero: (
-        <span className="text-xs font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
+        <span className="text-xs w-fit font-semibold text-white bg-blue-700 rounded-full px-2 py-1">
           Caballero
         </span>
       ),
       dama: (
-        <span className="text-xs font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
+        <span className="text-xs w-fit font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
           Dama
         </span>
       ),
@@ -100,7 +101,7 @@ export function Product({ data }) {
 
     if (Array.isArray(category)) {
       return (
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center">
           {category.map((cat) => categoryElements[cat])}
         </div>
       );
@@ -108,67 +109,85 @@ export function Product({ data }) {
       return categoryElements[category];
     }
   };
-
+  const renderProductImage = (img) => {
+    if (img.length === 1) {
+      return (
+        <motion.img
+          className="w-full cursor-pointer aspect-[500/500] rounded-xl"
+          src={img[0]}
+          alt={data.title}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => showProduct()}
+        />
+      );
+    } else if (img.length > 1) {
+      return (
+        <Carousel className="overflow-hidden z-10 relative mx-auto cursor-pointer mb-5 w-full">
+          {img.map((image, index) => (
+            <motion.img
+              key={index}
+              className="w-full cursor-pointer aspect-[500/500] rounded-xl"
+              src={image}
+              alt={data.title}
+            />
+          ))}
+        </Carousel>
+      );
+    }
+  };
   return (
     <>
       {alertMessage && (
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
+          onClick={() => context.openOrderCheck()}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.9 }}
           exit={{ opacity: 0, y: 100 }}
-          className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[99] flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+          className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
           role="alert"
         >
           <div className="flex items-center justify-center gap-1 text-right">
             <span className="font-semibold">{alertMessage}</span>
             <span>ha sido agregado al carrito</span>
-            <button onClick={() => context.openOrderCheck()}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                width={20}
-                height={20}
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
           </div>
         </motion.div>
       )}
 
-      <div className="product flex flex-col mx-auto items-center md:w-[300px] lg:w-[350px]">
-        <motion.img
-          whileHover={{ scale: 1.05 }}
-          onClick={() => showProduct()}
-          className="w-full cursor-pointer aspect-[500/500] rounded-xl"
-          src={data.img}
-          alt={data.title}
-        />
-        <div className="flex p-5 items-center justify-between mx-auto mt-5 w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
-          <div>
-            {renderCategoryIcons(data.category)}
-            <p className="text-xl font-semibold text-gray-400">{data.title}</p>
-            <p className="text-3xl font-extrabold text-white">${data.price}</p>
+      <div className="product flex flex-col mx-auto items-center justify-between w-[90vw] md:w-[50vw] lg:w-[350px] min-h-0">
+        {renderProductImage(data.img)}
+        <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
+          <div className="flex flex-col">
+            <span className="mb-2">{renderCategoryIcons(data.category)}</span>
+            <span className="text-xl font-semibold text-gray-400">
+              {data.title}
+            </span>
+            <span className="text-3xl font-bold text-white">${data.price}</span>
           </div>
 
-          <div className="flex items-center justify-between">
-            <span className="flex items-center justify-between">
+          <div className="flex items-center gap-2 justify-between flex-col">
+            <span className="flex w-full">
+              {data.img.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => showProduct()}
+                  className="text-white bg-yellow-600 w-full hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-xs px-5 py-2.5 text-center dark:focus:ring-yellow-900"
+                >
+                  Ver más
+                </button>
+              ) : null}
+            </span>
+            <span className="flex items-center justify-between ">
               <a
                 href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${data.title}`}
                 target="_blank"
                 type="button"
-                className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                className="text-white text-xs bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
               >
                 Comprar
               </a>
+
               {renderIcons(data.id)}
             </span>
           </div>
@@ -180,7 +199,6 @@ export function Product({ data }) {
 
 Product.propTypes = {
   data: PropTypes.shape({
-    img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

@@ -3,8 +3,106 @@ import { ProductContext } from "../Context";
 import { useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
+import Carousel from "../Carousel";
+import { useState } from "react";
 export function ProductDetail() {
   const context = useContext(ProductContext);
+
+  const [alertMessage, setAlertMessage] = useState(null);
+  const addProductsToCart = (productToAdd) => {
+    context.setCount(context.count + 1);
+    context.setCartProducts([...context.cartProducts, productToAdd]);
+    showAlert(productToAdd.title);
+  };
+
+  const showAlert = (productTitle) => {
+    setAlertMessage(productTitle + " ");
+    setTimeout(() => setAlertMessage(null), 5000);
+  };
+  const renderCartIcons = (id) => {
+    const isInCart = context.cartProducts.some((product) => product.id === id);
+
+    if (isInCart) {
+      return (
+        <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icon-tabler-shopping-cart-check"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+            <path d="M11.5 17h-5.5v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+            <path d="M15 19l2 2l4 -4" />
+          </svg>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          onClick={() => addProductsToCart(context.productToShow)}
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icon-tabler-shopping-cart-plus"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+            <path d="M12.5 17h-6.5v-14h-2" />
+            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5" />
+            <path d="M16 19h6" />
+            <path d="M19 16v6" />
+          </svg>
+        </button>
+      );
+    }
+  };
+
+  const renderProductImage = (product) => {
+    if (product.img.length === 1) {
+      return (
+        <motion.img
+          className="w-[50%] ml-5"
+          src={product.img[0]}
+          alt={product.title}
+        />
+      );
+    } else if (product.img.length > 1) {
+      return (
+        <Carousel>
+          {product.img.map((image, index) => (
+            <motion.img
+              key={index}
+              className="w-full"
+              src={image}
+              alt={product.title}
+            />
+          ))}
+        </Carousel>
+      );
+    }
+  };
   return (
     <>
       <AnimatePresence initial={false}>
@@ -43,12 +141,7 @@ export function ProductDetail() {
             </div>
 
             <figure className="w-full mx-auto flex flex-col justify-between gap-y-5 md:flex-row md:w-full mb-5">
-              <img
-                src={context.productToShow.img}
-                alt={context.productToShow.title}
-                className="w-[80%] mx-auto md:w-[50%] aspect-[500/500] mt-5"
-              />
-
+              {renderProductImage(context.productToShow)}
               <div className="flex flex-col md:w-[40%] m-auto w-[85%] gap-x-5">
                 <div className="flex items-center justify-between gap-8">
                   <div className="flex flex-col gap-2">
@@ -67,22 +160,7 @@ export function ProductDetail() {
                   </div>
                 </div>
                 <br />
-                <div className="flex flex-col gap-5 text-center text-white/60 md:text-left">
-                  <div className="flex flex-col md:flex-row items-center ">
-                    <p className="font-bold">Tallas disponibles:</p>
-                    <ul className="p-0 mx-auto flex items-center justify-between gap-5">
-                      {context.productToShow.sizes.map((size) => {
-                        return (
-                          <li
-                            className="flex items-center justify-center p-2 backdrop-blur-xl rounded-full w-8 h-8 font-semibold"
-                            key={context.productToShow.id}
-                          >
-                            {size}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
+                <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left">
                   <a
                     href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${context.productToShow.title}`}
                     target="_blank"
@@ -91,10 +169,28 @@ export function ProductDetail() {
                   >
                     Comprar
                   </a>
+                  {renderCartIcons(context.productToShow.id)}
                 </div>
               </div>
             </figure>
           </motion.aside>
+        )}
+        {alertMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => context.openOrderCheck()}
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+            role="alert"
+          >
+            <div className="flex items-center justify-center gap-1 text-right">
+              <span className="font-semibold">{alertMessage}</span>
+              <span>ha sido agregado al carrito</span>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
