@@ -36,8 +36,8 @@ export function Product({ data }) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
+            width={20}
+            height={20}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -63,8 +63,8 @@ export function Product({ data }) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
+            width={20}
+            height={20}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -93,7 +93,7 @@ export function Product({ data }) {
         </span>
       ),
       dama: (
-        <span className="text-xs w-fit font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
+        <span className="mr-1 text-xs w-fit font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
           Dama
         </span>
       ),
@@ -159,8 +159,10 @@ export function Product({ data }) {
         {renderProductImage(data.img)}
         <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div className="flex flex-col">
-            <span className="mb-2">{renderCategoryIcons(data.category)}</span>
-            <span className="text-xl font-semibold text-gray-400">
+            <span className="mb-2 gap-1 flex flex-col">
+              {renderCategoryIcons(data.category)}
+            </span>
+            <span className="text-md font-regular text-gray-400">
               {data.title}
             </span>
             <span className="text-3xl font-bold text-white">${data.price}</span>

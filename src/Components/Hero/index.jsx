@@ -8,7 +8,7 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7 }}
-        className="w-full h-max-screen mb-6 text-center mx-auto flex-col gap-10 flex items-center justify-center md:flex-row md:justify-between mt-[18vh] md:w-[80vw] md:text-left"
+        className="w-screen h-max-screen lg:h-[100vh] lg:mt-[13vh] mb-6 text-center mx-auto flex-col gap-10 flex items-center justify-center md:flex-row md:justify-between mt-[18vh] md:w-[80vw] md:text-left"
       >
         <motion.span className="flex flex-col w-full text-3xl font-semibold text-white">
           <span className="text-xl font-semibold text-white">Bienvenido a</span>

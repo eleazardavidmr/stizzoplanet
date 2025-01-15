@@ -83,14 +83,14 @@ export function ProductDetail() {
     if (product.img.length === 1) {
       return (
         <motion.img
-          className="w-[50%] ml-5"
+          className="w-[90%] aspect-[500/500] ml-5 mx-auto"
           src={product.img[0]}
           alt={product.title}
         />
       );
     } else if (product.img.length > 1) {
       return (
-        <Carousel>
+        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 w-[90%]">
           {product.img.map((image, index) => (
             <motion.img
               key={index}
