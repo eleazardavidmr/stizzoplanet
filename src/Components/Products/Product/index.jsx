@@ -135,6 +135,7 @@ export function Product({ data }) {
       );
     }
   };
+
   return (
     <>
       {alertMessage && (
@@ -157,9 +158,10 @@ export function Product({ data }) {
 
       <div className="product flex flex-col mx-auto items-center justify-between w-[90vw] md:w-[50vw] lg:w-[350px] min-h-0">
         {renderProductImage(data.img)}
+
         <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
           <div className="flex flex-col">
-            <span className="mb-2 gap-1 flex flex-col">
+            <span className="mb-2 gap-1 flex">
               {renderCategoryIcons(data.category)}
             </span>
             <span className="text-md font-regular text-gray-400">

@@ -5,6 +5,8 @@ import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import Carousel from "../Carousel";
 import { useState } from "react";
+import { InstagramLogo } from "../../Icons/InstagramLogo";
+import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
 export function ProductDetail() {
   const context = useContext(ProductContext);
 
@@ -19,6 +21,19 @@ export function ProductDetail() {
     setAlertMessage(productTitle + " ");
     setTimeout(() => setAlertMessage(null), 5000);
   };
+
+  const renderBadge = () => {
+    if (context.productToShow.new) {
+      return (
+        <span className=" h-fit w-fit bg-pink-100 text-pink-800 text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">
+          Nuevo
+        </span>
+      );
+    } else {
+      return null;
+    }
+  };
+
   const renderCartIcons = (id) => {
     const isInCart = context.cartProducts.some((product) => product.id === id);
 
@@ -83,14 +98,14 @@ export function ProductDetail() {
     if (product.img.length === 1) {
       return (
         <motion.img
-          className="w-[90%] aspect-[500/500] ml-5 mx-auto"
+          className=" w-full md:w-[50%] aspect-[500/500] ml-5 mx-auto"
           src={product.img[0]}
           alt={product.title}
         />
       );
     } else if (product.img.length > 1) {
       return (
-        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 w-[90%]">
+        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 md:w-[50%] w-[90%]">
           {product.img.map((image, index) => (
             <motion.img
               key={index}
@@ -103,6 +118,18 @@ export function ProductDetail() {
       );
     }
   };
+
+  const BuyButton = ({ content }) => {
+    return (
+      <button
+        type="button"
+        className="p-2 w-12 h-12 flex items-center justify-center text-sm font-medium  focus:outline-none text-white/60 rounded-full  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+      >
+        {content}
+      </button>
+    );
+  };
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -140,36 +167,51 @@ export function ProductDetail() {
               </motion.span>
             </div>
 
-            <figure className="w-full mx-auto flex flex-col justify-between gap-y-5 md:flex-row md:w-full mb-5">
+            <figure className="w-full mx-auto flex flex-col justify-between md:flex-row md:w-full">
               {renderProductImage(context.productToShow)}
-              <div className="flex flex-col md:w-[40%] m-auto w-[85%] gap-x-5">
-                <div className="flex items-center justify-between gap-8">
-                  <div className="flex flex-col gap-2">
-                    <span className="flex w-full items-center justify-between">
-                      <p className="font-regular text-xl">
-                        {context.productToShow.title}
-                      </p>
-                      <p className="font-extrabold text-2xl">
-                        ${context.productToShow.price}
-                      </p>
-                    </span>
+              <div className="flex flex-col items-center justify-center h-fit gap-5 md:w-[40%] m-auto w-[85%] ">
+                <div className="flex flex-col gap-x-5">
+                  <div className="flex items-center justify-between gap-8">
+                    <div className="flex flex-col gap-y-2 items-end w-full">
+                      {renderBadge()}
+                      <span className="flex w-full items-center justify-between">
+                        <p className="font-regular text-xl">
+                          {context.productToShow.title}
+                        </p>
+                        <p className="font-extrabold text-2xl">
+                          ${context.productToShow.price}
+                        </p>
+                      </span>
 
-                    <p className="text-white/60 md:text-left">
-                      {context.productToShow.desc}
-                    </p>
+                      <p className="text-white/60 md:text-left">
+                        {context.productToShow.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left">
+                    <a
+                      href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${context.productToShow.title}`}
+                      target="_blank"
+                      type="button"
+                      className="text-white w-full bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    >
+                      Comprar
+                    </a>
+                    {renderCartIcons(context.productToShow.id)}
                   </div>
                 </div>
-                <br />
-                <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left">
-                  <a
-                    href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${context.productToShow.title}`}
-                    target="_blank"
-                    type="button"
-                    className="text-white w-full bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                  >
-                    Comprar
-                  </a>
-                  {renderCartIcons(context.productToShow.id)}
+                {/* PRODUCT-DETAIL INFO BUTTONS*/}
+                <div className="flex items-center justify-center w-[90%] gap-5 mb-5 md:mb-0">
+                  <p className="text-white/60">Compralos ya!</p>
+                  <div className="flex items-center justify-center gap-1">
+                    <BuyButton
+                      content={<InstagramLogo width={24} height={24} />}
+                    />
+                    <BuyButton
+                      content={<WhatsAppLogo width={24} height={24} />}
+                    />
+                  </div>
                 </div>
               </div>
             </figure>
