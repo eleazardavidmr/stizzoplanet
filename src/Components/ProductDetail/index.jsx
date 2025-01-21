@@ -7,19 +7,32 @@ import Carousel from "../Carousel";
 import { useState } from "react";
 import { InstagramLogo } from "../../Icons/InstagramLogo";
 import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
+import { Link } from "react-router-dom";
 export function ProductDetail() {
   const context = useContext(ProductContext);
 
-  const [alertMessage, setAlertMessage] = useState(null);
+  const [productAddedToCartMessage, setProductAddedToCartMessage] =
+    useState(null);
+  const [productAddedToFavoritesMessage, setProductAddedToFavoritesMessage] =
+    useState(null);
+
   const addProductsToCart = (productToAdd) => {
     context.setCount(context.count + 1);
     context.setCartProducts([...context.cartProducts, productToAdd]);
-    showAlert(productToAdd.title);
+    showProductAddedToCartMessage(
+      productToAdd.title,
+      " ha sido agregado al carrito."
+    );
   };
 
-  const showAlert = (productTitle) => {
-    setAlertMessage(productTitle + " ");
-    setTimeout(() => setAlertMessage(null), 5000);
+  const showProductAddedToCartMessage = (productTitle, message) => {
+    setProductAddedToCartMessage(productTitle + message);
+    setTimeout(() => setProductAddedToCartMessage(null), 5000);
+  };
+
+  const showProductAddedToFavoritesMessage = (productTitle, message) => {
+    setProductAddedToFavoritesMessage(productTitle + message);
+    setTimeout(() => setProductAddedToFavoritesMessage(null), 5000);
   };
 
   const renderBadge = () => {
@@ -217,7 +230,27 @@ export function ProductDetail() {
             </figure>
           </motion.aside>
         )}
-        {alertMessage && (
+        {productAddedToFavoritesMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-primary-light border border-primary rounded-lg bg-green-50 dark:bg-gray-800 "
+            role="alert"
+          >
+            <Link to="/favoritos">
+              <div className="flex items-center justify-center gap-1 text-right">
+                <span className="font-semibold">
+                  {productAddedToFavoritesMessage}
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        )}
+
+        {productAddedToCartMessage && (
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,12 +258,11 @@ export function ProductDetail() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => context.openOrderCheck()}
-            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
             role="alert"
           >
             <div className="flex items-center justify-center gap-1 text-right">
-              <span className="font-semibold">{alertMessage}</span>
-              <span>ha sido agregado al carrito</span>
+              <span className="font-semibold">{productAddedToCartMessage}</span>
             </div>
           </motion.div>
         )}

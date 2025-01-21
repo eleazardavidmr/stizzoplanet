@@ -1,5 +1,4 @@
 import "./App.css";
-import { ProductProvider } from "./Components/Context";
 import FilterNav from "./Components/FilterNav";
 import { Footer } from "./Components/Footer";
 import { Hero } from "./Components/Hero";
@@ -11,17 +10,15 @@ import { Products } from "./Components/Products";
 function App() {
   return (
     <>
-      <ProductProvider>
-        <OrderCheck />
-        <ProductDetail />
-        {/* NoiseBackground, Navbar, Hero, Products, Footer */}
-        <NoiseBackground />
-        <Navbar />
-        <Hero />
-        <FilterNav />
-        <Products />
-        <Footer />
-      </ProductProvider>
+      <OrderCheck />
+      <ProductDetail />
+      {/* NoiseBackground, Navbar, Hero, Products, Footer */}
+      <NoiseBackground />
+      <Navbar />
+      <Hero />
+      <FilterNav />
+      <Products />
+      <Footer />
     </>
   );
 }

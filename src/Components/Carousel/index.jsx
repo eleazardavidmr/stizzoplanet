@@ -4,7 +4,7 @@ export default function Carousel({
   children: slides,
   autoSlide = false,
   autoSlideInterval = 3000,
-  className = "overflow-hidden relative mx-auto cursor-pointer mb-5 w-[50%]",
+  className = "overflow-hidden relative mx-auto cursor-pointer mb-5 w-[50%] -z-30",
 }) {
   const [curr, setCurr] = useState(0);
 
@@ -27,7 +27,7 @@ export default function Carousel({
         {slides}
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-between p-4 ">
+      <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prev}
           className="p-1 rounded-full shadow bg-white/80 hover:bg-white/60"

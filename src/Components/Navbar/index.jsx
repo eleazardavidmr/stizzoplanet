@@ -7,7 +7,7 @@ import "./styles.css";
 //react
 import { useState, useEffect, useContext } from "react";
 import Hamburger from "hamburger-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 //famer motion
 import { AnimatePresence } from "framer-motion";
@@ -44,12 +44,15 @@ export function Navbar() {
     <>
       <div
         className={` ${
-          isScrolled ? "backdrop-blur-2xl scrolled h-[15vh]" : ""
-        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen h-[13vh] px-8 py-5 md:justify-center `}
+          isScrolled ? "backdrop-blur-2xl scrolled" : ""
+        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen  h-[13vh]  md:justify-center `}
       >
         <div className="flex items-center justify-between w-full mx-auto lg:w-[80vw] md:justify-center">
-          <span className="md:hidden lg:hidden flex items-center justify-between w-full">
-            <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
+          <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
+            <Link to="/">
+              <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
+            </Link>
+
             <div className="flex items-center justify-between gap">
               <span className="text-black">
                 <button
@@ -95,7 +98,7 @@ export function Navbar() {
               whileTap={{ scale: 0.95 }}
               onClick={() => context.openOrderCheck()}
               type="button"
-              className="relative inline-flex items-center p-2 text-sm font-medium right-5 me-2 mb-2  hover:bg-primary text-white rounded-full"
+              className="relative inset-2 inline-flex items-center p-2 text-sm font-medium right-5 me-2 mb-2  hover:bg-primary text-white rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,22 +123,76 @@ export function Navbar() {
               </motion.div>
             </motion.button>
             <div>
-              <Link to="/">
-                <NavbarButton content="Productos" />
-              </Link>
+              <NavLink
+                to="/favoritos"
+                className={({ isActive }) => {
+                  return isActive
+                    ? "text-xs px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+                    : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+                }}
+              >
+                Favoritos
+              </NavLink>
             </div>
 
-            <Link to="/">
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? "w-[160px] " : "w-[150px]";
+              }}
+              to="/"
+            >
               <motion.img
                 whileTap={{ scale: 0.8 }}
                 whileHover={{ scale: 1.05 }}
                 src={logo}
                 alt="logo"
-                className="w-[150px] "
+                className="w-full"
               />
-            </Link>
+            </NavLink>
 
             <div className="flex items-center justify-center">
+              <a
+                href="https://www.instagram.com/stizzoplanet_/"
+                target="_blank"
+              >
+                <NavbarButton
+                  content={<InstagramLogo width={20} height={20} />}
+                />
+              </a>
+              <a href="https://wa.me/573248600843" target="_blank">
+                <NavbarButton
+                  content={<WhatsAppLogo width={20} height={20} />}
+                />
+              </a>
+              <a
+                href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
+                target="_blank"
+              >
+                <NavbarButton content={<TikTokLogo width={20} height={20} />} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {menuOpen && (
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            className="top-14 w-screen  h-96 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
+          >
+            <NavLink
+              to="/favoritos"
+              className={({ isActive }) => {
+                return isActive
+                  ? "text-sm px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+                  : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+              }}
+            >
+              Favoritos
+            </NavLink>
+            <div>
               <a
                 href="https://www.instagram.com/stizzoplanet_/"
                 target="_blank"
@@ -156,31 +213,6 @@ export function Navbar() {
                 <NavbarButton content={<TikTokLogo width={24} height={24} />} />
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-      {menuOpen && (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            className="top-15 w-full h-[100px] z-[9999] backdrop-blur-2xl rounded-md fixed flex items-center justify-center"
-          >
-            <a href="https://www.instagram.com/stizzoplanet_/" target="_blank">
-              <NavbarButton
-                content={<InstagramLogo width={24} height={24} />}
-              />
-            </a>
-            <a href="https://wa.me/573248600843" target="_blank">
-              <NavbarButton content={<WhatsAppLogo width={24} height={24} />} />
-            </a>
-            <a
-              href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
-              target="_blank"
-            >
-              <NavbarButton content={<TikTokLogo width={24} height={24} />} />
-            </a>
           </motion.div>
         </AnimatePresence>
       )}

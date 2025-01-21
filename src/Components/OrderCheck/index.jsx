@@ -90,11 +90,11 @@ export function OrderCheck() {
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0 }}
                           key={index}
-                          className="flex flex-col w-[90%] md:flex-row mx-auto rounded-lg p-0 border border-gray-300 dark:border-gray-700"
+                          className="flex h-fit flex-col w-[90%] md:flex-row mx-auto rounded-lg border border-gray-300 dark:border-gray-700"
                         >
                           {renderProductImage(product)}
-                          <div className="flex w-[80%] p-3 h-full border-l border-gray-300 dark:border-gray-700 m-auto flex-col">
-                            <span className="flex justify-between items-center w-full mb-5">
+                          <div className="flex w-[90%] p-3 h- md:border-l border-gray-300 dark:border-gray-700 m-auto flex-col">
+                            <span className="flex justify-between items-center  w-full mb-5">
                               <h1 className="text-md text-white/70">
                                 {product.title}
                               </h1>
@@ -102,7 +102,7 @@ export function OrderCheck() {
                                 ${product.price}
                               </span>
                             </span>
-                            <div className="flex-grow text-white/60 text-sm">
+                            <div className="text-white/60 text-sm">
                               {product.desc}
                             </div>
                             <button

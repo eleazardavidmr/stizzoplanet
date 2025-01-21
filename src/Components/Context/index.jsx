@@ -5,6 +5,29 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
+      id: 10,
+      img: [
+        "/img/products/airMax95/airmax95-green.png",
+        "/img/products/airMax95/airmax95-blue.png",
+      ],
+      title: "Air Max 95",
+      desc: "Air Max 95❇️ Un modelo muy clásico〽️ Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+      new: false,
+    },
+    {
+      id: 9,
+      img: ["/img/products/adidasBadBunny.png"],
+      title: "Adidas X Bad Bunny",
+      desc: "Ad/das Response x Bad Bunny🔥 Todos los colores disponibles, escríbenos y haz tu pedido📲✔️",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: ["dama", "caballero"],
+      new: true,
+    },
+    {
       id: 8,
       img: [
         "/img/products/rebook/rebook-black.png",
@@ -58,7 +81,7 @@ export const ProductProvider = ({ children }) => {
       desc: "Un modelo clásico que no puede faltar🔝 Disponible para hombre y dama aquí en @stizzoplanet_ 🤩",
       sizes: [44, 42, 40],
       price: 999,
-      category: ["dama", "caballero"],
+      category: "dama",
       new: false,
     },
     {
@@ -88,7 +111,7 @@ export const ProductProvider = ({ children }) => {
       desc: "N🔝KE V2K✔️ De nuevo disponible para hombre y dama 🤩 Haz tu pedido y te lo entregamos con domi gratis en Cali📍",
       sizes: [44, 42, 43],
       price: 999,
-      category: ["dama", "caballero"],
+      category: "dama",
       new: false,
     },
   ];
@@ -122,6 +145,12 @@ export const ProductProvider = ({ children }) => {
           : product.category === selectedCategory
       )
     : PRODUCTS;
+
+  //favorites
+
+  const [favorites, setFavorites] = useState([]);
+  const [isInFavorites, setIsInFavorites] = useState();
+
   return (
     <ProductContext.Provider
       value={{
@@ -143,6 +172,10 @@ export const ProductProvider = ({ children }) => {
         setSelectedCategory,
         filteredProducts,
         PRODUCTS,
+        favorites,
+        setFavorites,
+        isInFavorites,
+        setIsInFavorites,
       }}
     >
       {children}
