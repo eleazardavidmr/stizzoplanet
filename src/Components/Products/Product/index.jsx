@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Carousel from "../../Carousel";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import InfoIcon from "../../../Icons/InfoIcon";
 
 export function Product({ data }) {
   const context = useContext(ProductContext);
@@ -128,18 +129,18 @@ export function Product({ data }) {
     if (img.length === 1) {
       return (
         <motion.img
-          className="w-full cursor-pointer aspect-[500/500]"
+          className="w-full cursor-pointer aspect-[500/500] product-image"
           src={img[0]}
           alt={data.title}
         />
       );
     } else if (img.length > 1) {
       return (
-        <Carousel className="overflow-hidden z-10 relative mx-auto cursor-pointer mb-5 w-full">
+        <Carousel className="overflow-hidden -z-50 relative mx-auto cursor-pointer mb-5 w-full">
           {img.map((image, index) => (
             <motion.img
               key={index}
-              className="w-full cursor-pointer aspect-[500/500]"
+              className="w-full cursor-pointer aspect-[500/500] product-image"
               src={image}
               alt={data.title}
             />
@@ -307,28 +308,12 @@ export function Product({ data }) {
               onClick={() => showProduct()}
               className=""
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="icon icon-tabler icons-tabler-outline icon-tabler-info-circle"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-                <path d="M12 9h.01" />
-                <path d="M11 12h1v4h1" />
-              </svg>
+              <InfoIcon />
             </motion.button>
             {renderLikeButton(data.id)}
           </div>
           {renderProductImage(data.img)}
-          <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 dark:bg-[#101f2e] rounded-b-lg">
+          <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 bg-blue-950 dark:bg-[#101f2e] rounded-b-lg">
             <div className="flex flex-col">
               <span className="mb-2 gap-1 flex">
                 {renderCategoryIcons(data.category)}

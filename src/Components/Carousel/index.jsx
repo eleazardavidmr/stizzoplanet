@@ -4,7 +4,7 @@ export default function Carousel({
   children: slides,
   autoSlide = false,
   autoSlideInterval = 3000,
-  className = "overflow-hidden relative mx-auto cursor-pointer mb-5 w-[50%] -z-30",
+  className = "overflow-hidden relative mx-auto cursor-pointer mb-5 w-[50%] ",
 }) {
   const [curr, setCurr] = useState(0);
 
@@ -21,7 +21,7 @@ export default function Carousel({
   return (
     <div className={className}>
       <div
-        className="flex transition-transform ease-out duration-500"
+        className="flex transition-transform ease-out duration-500 "
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         {slides}
@@ -30,7 +30,7 @@ export default function Carousel({
       <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prev}
-          className="p-1 rounded-full shadow bg-white/80 hover:bg-white/60"
+          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ export default function Carousel({
         </button>
         <button
           onClick={next}
-          className="p-1 rounded-full shadow bg-white/80 hover:bg-white/60"
+          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export default function Carousel({
         </button>
       </div>
 
-      <div className="absolute bottom-0 right-0 left-0">
+      <div className="absolute bottom-0 right-0 left-0 ">
         <div className="flex items-center justify-center gap-2">
           {slides.map((_, i) => (
             <div

@@ -31,7 +31,7 @@ export function OrderCheck() {
       );
     } else if (product.img.length > 1) {
       return (
-        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 w-full">
+        <Carousel className="overflow-hidden -z-50 relative mx-auto cursor-pointer mb-5 w-full">
           {product.img.map((image, index) => (
             <img
               src={image}

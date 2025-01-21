@@ -5,6 +5,16 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
+      id: 11,
+      img: ["/img/products/adidasSamba.png"],
+      title: "Adidas Samba",
+      desc: "¿Qué tal estas nuevas samba?👀❤️💘 ¡Escríbenos y agenda tu pedido!🚚",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "dama",
+      new: true,
+    },
+    {
       id: 10,
       img: [
         "/img/products/airMax95/airmax95-green.png",

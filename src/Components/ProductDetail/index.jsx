@@ -8,12 +8,16 @@ import { useState } from "react";
 import { InstagramLogo } from "../../Icons/InstagramLogo";
 import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
 import { Link } from "react-router-dom";
+import InfoIcon from "../../Icons/InfoIcon";
 export function ProductDetail() {
   const context = useContext(ProductContext);
 
   const [productAddedToCartMessage, setProductAddedToCartMessage] =
     useState(null);
-  const [productAddedToFavoritesMessage, setProductAddedToFavoritesMessage] =
+
+  const [deletingFromFavoritesMessage, setDeletingFromFavoritesMessage] =
+    useState(null);
+  const [addingToFavoritesMessage, setAddingToFavoritesMessage] =
     useState(null);
 
   const addProductsToCart = (productToAdd) => {
@@ -25,14 +29,19 @@ export function ProductDetail() {
     );
   };
 
+  //alerts functions
   const showProductAddedToCartMessage = (productTitle, message) => {
     setProductAddedToCartMessage(productTitle + message);
     setTimeout(() => setProductAddedToCartMessage(null), 5000);
   };
+  const showDeletingFromFavoritesAlert = (productTitle, message) => {
+    setDeletingFromFavoritesMessage(productTitle + " " + message);
+    setTimeout(() => setDeletingFromFavoritesMessage(null), 3000);
+  };
 
-  const showProductAddedToFavoritesMessage = (productTitle, message) => {
-    setProductAddedToFavoritesMessage(productTitle + message);
-    setTimeout(() => setProductAddedToFavoritesMessage(null), 5000);
+  const showAddingToFavoritesAlert = (productTitle, message) => {
+    setAddingToFavoritesMessage(productTitle + " " + message);
+    setTimeout(() => setAddingToFavoritesMessage(null), 3000);
   };
 
   const renderBadge = () => {
@@ -111,7 +120,7 @@ export function ProductDetail() {
     if (product.img.length === 1) {
       return (
         <motion.img
-          className=" w-full md:w-[50%] aspect-[500/500] ml-5 mx-auto"
+          className="w-full md:w-[50%] aspect-[500/500] ml-5 mx-auto"
           src={product.img[0]}
           alt={product.title}
         />
@@ -143,6 +152,82 @@ export function ProductDetail() {
     );
   };
 
+  const renderLikeButton = (id) => {
+    const isInFavorites = context.favorites.some(
+      (product) => product.id === id
+    );
+
+    if (isInFavorites) {
+      return (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.8 }}
+          type="button"
+          onClick={() => deleteFromFavorites(context.productToShow)}
+          className="bg-primary rounded-full p-2 w-10 h-10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="icon icon-tabler icons-tabler-filled icon-tabler-heart"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" />
+          </svg>
+        </motion.button>
+      );
+    } else {
+      return (
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.8 }}
+          type="button"
+          className="bg-primary transition-all rounded-full p-2 w-10 h-10"
+          onClick={() => addProductToFavorites(context.productToShow)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-heart"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+          </svg>
+        </motion.button>
+      );
+    }
+  };
+
+  //adding products to favorites
+  const addProductToFavorites = (productToAdd) => {
+    context.setFavorites([...context.favorites, productToAdd]);
+    showAddingToFavoritesAlert(
+      productToAdd.title,
+      "ha sido agregado a favoritos."
+    );
+  };
+  //deleting products from favorites
+  const deleteFromFavorites = (productToDelete) => {
+    const filteredFavorites = context.favorites.filter(
+      (product) => product.id !== productToDelete.id
+    );
+    context.setFavorites(filteredFavorites);
+    showDeletingFromFavoritesAlert(
+      productToDelete.title,
+      "ha sido eliminado de favoritos."
+    );
+  };
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -154,8 +239,13 @@ export function ProductDetail() {
             key="box"
             className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden  z-[99] w-[90vw] h-[90vh] rounded-lg  mx-auto overflow-auto md:w-[90vw] md:left-[3%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto]"
           >
-            <div className="sticky bg-[#090F15] md:bg-transparent md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
-              <h1 className="font-semibold text-2xl">Detalle</h1>
+            <div className="sticky md:bg-transparent md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
+              <span className="flex gap-2  justify-center items-center">
+                <span className="text-white/60">
+                  <InfoIcon />
+                </span>
+                <h1 className="font-semibold text-2xl">Detalle</h1>
+              </span>
 
               <motion.span
                 whileTap={{ scale: 0.8 }}
@@ -212,42 +302,12 @@ export function ProductDetail() {
                       Comprar
                     </a>
                     {renderCartIcons(context.productToShow.id)}
-                  </div>
-                </div>
-                {/* PRODUCT-DETAIL INFO BUTTONS*/}
-                <div className="flex items-center justify-center w-[90%] gap-5 mb-5 md:mb-0">
-                  <p className="text-white/60">Compralos ya!</p>
-                  <div className="flex items-center justify-center gap-1">
-                    <BuyButton
-                      content={<InstagramLogo width={24} height={24} />}
-                    />
-                    <BuyButton
-                      content={<WhatsAppLogo width={24} height={24} />}
-                    />
+                    {renderLikeButton(context.productToShow.id)}
                   </div>
                 </div>
               </div>
             </figure>
           </motion.aside>
-        )}
-        {productAddedToFavoritesMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.9 }}
-            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-primary-light border border-primary rounded-lg bg-green-50 dark:bg-gray-800 "
-            role="alert"
-          >
-            <Link to="/favoritos">
-              <div className="flex items-center justify-center gap-1 text-right">
-                <span className="font-semibold">
-                  {productAddedToFavoritesMessage}
-                </span>
-              </div>
-            </Link>
-          </motion.div>
         )}
 
         {productAddedToCartMessage && (
@@ -264,6 +324,55 @@ export function ProductDetail() {
             <div className="flex items-center justify-center gap-1 text-right">
               <span className="font-semibold">{productAddedToCartMessage}</span>
             </div>
+          </motion.div>
+        )}
+
+        {addingToFavoritesMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+            role="alert"
+          >
+            <Link to="/favoritos">
+              <div className="flex items-center justify-center gap-1 text-right">
+                <span className="font-semibold">
+                  {addingToFavoritesMessage}
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        )}
+
+        {deletingFromFavoritesMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+            role="alert"
+          >
+            <Link to="/favoritos">
+              <div className="flex items-center justify-center gap-1 text-right">
+                <svg
+                  className="flex-shrink-0 inline w-4 h-4 me-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span className="font-semibold">
+                  {deletingFromFavoritesMessage}
+                </span>
+              </div>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

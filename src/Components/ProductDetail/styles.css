@@ -1,7 +1,7 @@
 .product-detail {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
   border-radius: 10px;
   color: white;
   border: 0.5px solid rgba(255, 255, 255, 0.18);

@@ -44,10 +44,10 @@ export function Navbar() {
     <>
       <div
         className={` ${
-          isScrolled ? "backdrop-blur-2xl scrolled" : ""
-        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen  h-[13vh]  md:justify-center `}
+          isScrolled ? "backdrop-blur-[100px] scrolled" : ""
+        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen  h-[15%]  md:justify-center `}
       >
-        <div className="flex items-center justify-between w-full mx-auto lg:w-[80vw] md:justify-center">
+        <div className="flex items-center justify-between w-full mx-auto md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
             <Link to="/">
               <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
@@ -92,7 +92,7 @@ export function Navbar() {
             </div>
           </span>
 
-          <div className="hidden lg:flex md:flex lg:w-[70%] items-center justify-center gap-10">
+          <div className="hidden lg:flex md:flex items-center justify-center gap-10">
             <motion.button
               whileHover={{ scale: 1.07 }}
               whileTap={{ scale: 0.95 }}
@@ -137,7 +137,9 @@ export function Navbar() {
 
             <NavLink
               className={({ isActive }) => {
-                return isActive ? "w-[160px] " : "w-[150px]";
+                return isActive
+                  ? "w-[160px] transition-all"
+                  : "transition-all w-[150px]";
               }}
               to="/"
             >
