@@ -5,7 +5,7 @@ import { ProductContext } from "../Context";
 import "./styles.css";
 
 //react
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Hamburger from "hamburger-react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -25,28 +25,9 @@ export function Navbar() {
     setMenuOpen(toggled);
   };
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <div
-        className={` ${
-          isScrolled ? "backdrop-blur-[100px] scrolled" : ""
-        } fixed z-50 top-0 left-0 flex items-center justify-between w-screen  h-[15%]  md:justify-center `}
-      >
+      <div className="fixed backdrop-blur-[100px] z-50 top-0 left-0 flex items-center justify-between w-screen  h-[15%]  md:justify-center ">
         <div className="flex items-center justify-between w-full mx-auto md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
             <Link to="/">

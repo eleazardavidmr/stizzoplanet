@@ -108,7 +108,7 @@ export function Product({ data }) {
         </span>
       ),
       dama: (
-        <span className="mr-1 text-xs w-fit font-semibold text-white bg-pink-700 rounded-full px-2 py-1">
+        <span className="mr-1 text-xs w-fit font-semibold text-white text-pink-900 bg-pink-700 rounded-full px-2 py-1">
           Dama
         </span>
       ),
@@ -313,17 +313,19 @@ export function Product({ data }) {
             {renderLikeButton(data.id)}
           </div>
           {renderProductImage(data.img)}
-          <div className="flex p-4 items-center justify-between mx-auto w-full dark:border-gray-700 bg-blue-950 dark:bg-[#101f2e] rounded-b-lg">
+          <div className="flex p-5 items-center justify-between mx-auto w-full dark:border-gray-700 bg-blue-950 dark:bg-[#101f2e] rounded-b-lg">
             <div className="flex flex-col">
-              <span className="mb-2 gap-1 flex">
+              <span className="mb-2 gap-1 flex ">
                 {renderCategoryIcons(data.category)}
               </span>
-              <span className="text-md font-regular text-gray-400">
-                {data.title}
-              </span>
-              <span className="text-3xl font-bold text-white">
-                ${data.price}
-              </span>
+              <div className="flex items-left justify-center gap-1 flex-col">
+                <span className="text-md font-regular text-gray-400">
+                  {data.title}
+                </span>
+                <span className="text-3xl font-bold text-white">
+                  ${data.price}
+                </span>
+              </div>
             </div>
 
             <div className="flex items-center gap-2 justify-between flex-col">
