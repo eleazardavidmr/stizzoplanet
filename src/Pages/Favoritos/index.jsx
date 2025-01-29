@@ -10,12 +10,12 @@ export default function Favoritos() {
   const context = useContext(ProductContext);
   return (
     <>
-      <NoiseBackground />
       <Navbar />
+      <NoiseBackground />
       <OrderCheck />
       <ProductDetail />
       <AnimatePresence>
-        <section className=" w-[90vw] mx-auto lg:w-[80vw] mb-5 mt-[18vh] text-white">
+        <section className=" w-[90vw] mx-auto lg:w-[80vw] mb-5 mt-[15vh] text-white">
           {context.favorites.length >= 1 ? (
             <h1 className="text-2xl font-extrabold text-center mb-5 mt-5 md:text-left md:text-3xl">
               Tus favoritos de{" "}

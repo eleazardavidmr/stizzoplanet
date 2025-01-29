@@ -127,7 +127,7 @@ export function ProductDetail() {
       );
     } else if (product.img.length > 1) {
       return (
-        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 md:w-[50%] w-[90%]">
+        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 md:w-[50%] w-[90%] -z-50">
           {product.img.map((image, index) => (
             <motion.img
               key={index}
@@ -236,10 +236,9 @@ export function ProductDetail() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            key="box"
-            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden  z-[99] w-[90vw] h-[90vh] rounded-lg  mx-auto overflow-auto md:w-[90vw] md:left-[3%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto]"
+            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden  z-[99] w-[90vw] h-[90vh] rounded-lg  mx-auto overflow-auto md:w-[90vw] md:left-[4%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto]"
           >
-            <div className="sticky md:bg-transparent md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
+            <div className="sticky backdrop-blur-[100px] bg-white/10 border-b border-white/10 x-[101]  md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
               <span className="flex gap-2  justify-center items-center">
                 <span className="text-white/60">
                   <InfoIcon />
@@ -292,7 +291,7 @@ export function ProductDetail() {
                     </div>
                   </div>
                   <br />
-                  <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left">
+                  <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left mb-5">
                     <a
                       href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${context.productToShow.title}`}
                       target="_blank"

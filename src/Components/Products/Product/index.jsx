@@ -300,8 +300,8 @@ export function Product({ data }) {
       )}
 
       <AnimatePresence>
-        <motion.div className="product flex flex-col mx-auto items-center justify-between w-[90vw] md:w-[50vw] lg:w-[350px] min-h-0 ">
-          <div className="flex items-center justify-between w-[90%] transition-all mt-3 text-white/60">
+        <motion.div className="product rounded-xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between">
+          <div className="flex mx-auto items-center justify-between w-[90%] transition-all mt-3 text-white/60">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.8 }}

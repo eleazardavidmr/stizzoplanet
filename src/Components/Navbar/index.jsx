@@ -27,7 +27,12 @@ export function Navbar() {
 
   return (
     <>
-      <div className="fixed backdrop-blur-[100px] z-50 top-0 left-0 flex items-center justify-between w-screen  h-[15%]  md:justify-center ">
+      <motion.div
+        initial={{ y: -100 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 1 }}
+        className="nav-bar sticky top-5 backdrop-blur-[100px] z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
+      >
         <div className="flex items-center justify-between w-full mx-auto md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
             <Link to="/">
@@ -108,25 +113,17 @@ export function Navbar() {
                 to="/favoritos"
                 className={({ isActive }) => {
                   return isActive
-                    ? "text-xs px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-                    : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+                    ? "text-xs px-4 py-1.5 transition-all md:px-5 md:py-2.5 text-center border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+                    : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center border-2 border-primary/60 hover:bg-primary text-white rounded-full";
                 }}
               >
                 Favoritos
               </NavLink>
             </div>
 
-            <NavLink
-              className={({ isActive }) => {
-                return isActive
-                  ? "w-[160px] transition-all"
-                  : "transition-all w-[150px]";
-              }}
-              to="/"
-            >
+            <NavLink className="w-[150px] transition-all" to="/">
               <motion.img
                 whileTap={{ scale: 0.8 }}
-                whileHover={{ scale: 1.05 }}
                 src={logo}
                 alt="logo"
                 className="w-full"
@@ -156,20 +153,20 @@ export function Navbar() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       {menuOpen && (
         <AnimatePresence>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className="top-14 w-screen  h-96 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
+            className="top-[20vh] w-screen  h-80 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
           >
             <NavLink
               to="/favoritos"
               className={({ isActive }) => {
                 return isActive
-                  ? "text-sm px-4 py-1.5 font-bold transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
+                  ? "text-sm px-4 py-1.5  transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
                   : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
               }}
             >

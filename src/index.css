@@ -10,3 +10,7 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #f5f5f5 #333;
 }
+
+html {
+  scrollbar-gutter: stable;
+}
