@@ -31,7 +31,8 @@ export function Navbar() {
         initial={{ y: -100 }}
         whileInView={{ y: 0 }}
         transition={{ duration: 1 }}
-        className="nav-bar sticky top-5 backdrop-blur-[100px] z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
+        viewport={{ once: true }}
+        className="nav-bar sticky top-4 backdrop-blur-[50px] z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
       >
         <div className="flex items-center justify-between w-full mx-auto md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
@@ -39,11 +40,11 @@ export function Navbar() {
               <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
             </Link>
 
-            <div className="flex items-center justify-between gap">
-              <span className="text-black">
+            <div className="flex items-center justify-between gap text-white/80">
+              <span className="">
                 <button
                   type="button"
-                  className="relative inline-flex items-center p-2 text-sm font-medium"
+                  className="relative inline-flex items-center p-2 text-sm font-medium "
                   onClick={() => context.openOrderCheck()}
                 >
                   <svg
@@ -136,19 +137,19 @@ export function Navbar() {
                 target="_blank"
               >
                 <NavbarButton
-                  content={<InstagramLogo width={20} height={20} />}
+                  content={<InstagramLogo width={22} height={22} />}
                 />
               </a>
               <a href="https://wa.me/573248600843" target="_blank">
                 <NavbarButton
-                  content={<WhatsAppLogo width={20} height={20} />}
+                  content={<WhatsAppLogo width={22} height={22} />}
                 />
               </a>
               <a
                 href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
                 target="_blank"
               >
-                <NavbarButton content={<TikTokLogo width={20} height={20} />} />
+                <NavbarButton content={<TikTokLogo width={22} height={22} />} />
               </a>
             </div>
           </div>

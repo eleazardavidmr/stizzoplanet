@@ -129,6 +129,8 @@ export function Product({ data }) {
     if (img.length === 1) {
       return (
         <motion.img
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           className="w-full cursor-pointer aspect-[500/500] product-image"
           src={img[0]}
           alt={data.title}
@@ -139,6 +141,8 @@ export function Product({ data }) {
         <Carousel className="overflow-hidden -z-50 relative mx-auto cursor-pointer mb-5 w-full">
           {img.map((image, index) => (
             <motion.img
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               key={index}
               className="w-full cursor-pointer aspect-[500/500] product-image"
               src={image}
