@@ -108,7 +108,7 @@ export function Product({ data }) {
         </span>
       ),
       dama: (
-        <span className="mr-1 text-xs w-fit font-semibold text-white text-pink-900 bg-pink-700 rounded-full px-2 py-1">
+        <span className="mr-1 text-xs w-fit font-semibold text-white  bg-pink-700 rounded-full px-2 py-1">
           Dama
         </span>
       ),
@@ -117,7 +117,9 @@ export function Product({ data }) {
     if (Array.isArray(category)) {
       return (
         <div className="flex items-center justify-center">
-          {category.map((cat) => categoryElements[cat])}
+          {category.map((cat, index) => (
+            <div key={index}>{categoryElements[cat]}</div>
+          ))}
         </div>
       );
     } else {

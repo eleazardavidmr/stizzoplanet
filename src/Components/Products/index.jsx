@@ -3,7 +3,6 @@ import { ProductContext } from "../Context";
 import { useContext } from "react";
 export function Products() {
   const context = useContext(ProductContext);
-  console.log(context.selectedCategory);
   const renderCategoryTitle = () => {
     if (context.selectedCategory === "dama") {
       return (

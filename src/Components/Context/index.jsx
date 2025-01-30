@@ -5,6 +5,16 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
+      id: 12,
+      img: ["/img/products/newBalance1906.png"],
+      title: "New Balance 1906",
+      desc: "New 1906😎🔥Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "dama",
+      new: true,
+    },
+    {
       id: 11,
       img: ["/img/products/adidasSamba.png"],
       title: "Adidas Samba",
