@@ -5,9 +5,9 @@ import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { totalPrice } from "../../Utils";
 import Carousel from "../Carousel";
+
 export function OrderCheck() {
   const context = useContext(ProductContext);
-
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(
       (product) => product.id !== id
@@ -15,10 +15,6 @@ export function OrderCheck() {
     context.setCartProducts(filteredProducts);
     context.setCount(context.count - 1);
   };
-
-  /**
-                   
-   */
 
   const renderProductImage = (product) => {
     if (product.img.length === 1) {
@@ -88,8 +84,10 @@ export function OrderCheck() {
                         <motion.div
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0 }}
+                          transition={{ type: "keyframes" }}
+                          xit={{ opacity: 0, scale: 0 }}
                           key={index}
+                          layoutId={product.id}
                           className="flex h-fit flex-col w-[90%] md:flex-row mx-auto rounded-lg border border-gray-300 dark:border-gray-700"
                         >
                           {renderProductImage(product)}
