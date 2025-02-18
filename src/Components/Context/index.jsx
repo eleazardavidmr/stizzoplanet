@@ -1,9 +1,27 @@
 import { createContext, useState } from "react";
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
+    {
+      id: 13,
+      img: [
+        "img/products/airMax/airMax-black-and-white.png",
+        "/img/products/airMax/airMax-green.png",
+        "/img/products/airMax/airMax-blue.png",
+        "/img/products/airMax/airMax-orange.png",
+        "/img/products/airMax/airMax-brown.png",
+      ],
+      title: "Air Max",
+      desc: "Nuevo modelo disponible 🌪️👌🏻 Mira todos los colores disponibles en nuestro catálogo, link en el perfil📲",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+      new: true,
+    },
     {
       id: 12,
       img: ["/img/products/newBalance1906.png"],
@@ -170,6 +188,28 @@ export const ProductProvider = ({ children }) => {
 
   const [favorites, setFavorites] = useState([]);
   const [isInFavorites, setIsInFavorites] = useState();
+  // Load favorites from localStorage on component mount
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  // Save favorites to localStorage whenever favorites change
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // Function to add a product to favorites
+  const addToFavorites = (product) => {
+    if (!favorites.some((fav) => fav.id === product.id)) {
+      setFavorites([...favorites, product]);
+    }
+  };
+
+  // Function to remove a product from favorites
+  const removeFromFavorites = (productId) => {
+    setFavorites(favorites.filter((fav) => fav.id !== productId));
+  };
 
   return (
     <ProductContext.Provider
@@ -196,9 +236,15 @@ export const ProductProvider = ({ children }) => {
         setFavorites,
         isInFavorites,
         setIsInFavorites,
+        addToFavorites,
+        removeFromFavorites,
       }}
     >
       {children}
     </ProductContext.Provider>
   );
+};
+
+ProductProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

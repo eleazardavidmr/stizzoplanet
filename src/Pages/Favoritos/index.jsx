@@ -6,27 +6,8 @@ import { Product } from "../../Components/Products/Product";
 import { OrderCheck } from "../../Components/OrderCheck";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 export default function Favoritos() {
   const context = useContext(ProductContext);
-  const [deletingFromFavoritesMessage, setDeletingFromFavoritesMessage] =
-    useState(null);
-  const showDeletingFromFavoritesAlert = (productTitle, message) => {
-    setDeletingFromFavoritesMessage(productTitle + " " + message);
-    setTimeout(() => setDeletingFromFavoritesMessage(null), 3000);
-  };
-  const deleteFromFavorites = (productToDelete) => {
-    const filteredFavorites = context.favorites.filter(
-      (product) => product.id !== productToDelete.id
-    );
-    context.setFavorites(filteredFavorites);
-    showDeletingFromFavoritesAlert(
-      productToDelete.title,
-      "ha sido eliminado de favoritos."
-    );
-  };
   return (
     <>
       <Navbar />
@@ -58,34 +39,6 @@ export default function Favoritos() {
               ))}
           </div>
         </section>
-        {deletingFromFavoritesMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.9 }}
-            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
-            role="alert"
-          >
-            <Link to="/favoritos">
-              <div className="flex items-center justify-center gap-1 text-right">
-                <svg
-                  className="flex-shrink-0 inline w-4 h-4 me-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span className="font-semibold">
-                  {deletingFromFavoritesMessage}
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        )}
       </AnimatePresence>
     </>
   );

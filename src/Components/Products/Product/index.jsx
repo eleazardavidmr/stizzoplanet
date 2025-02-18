@@ -10,6 +10,23 @@ import InfoIcon from "../../../Icons/InfoIcon";
 export function Product({ data }) {
   const context = useContext(ProductContext);
 
+  //adding products to favorites
+  const addProductToFavorites = (productToAdd) => {
+    context.addToFavorites(productToAdd);
+    showAddingToFavoritesAlert(
+      productToAdd.title,
+      "ha sido agregado a favoritos."
+    );
+  };
+  //deleting products from favorites
+  const deleteFromFavorites = (productToDelete) => {
+    context.removeFromFavorites(productToDelete.id);
+    showDeletingFromFavoritesAlert(
+      productToDelete.title,
+      "ha sido eliminado de favoritos."
+    );
+  };
+
   //alerts states
   const [alertMessage, setAlertMessage] = useState(null);
   const [deletingFromFavoritesMessage, setDeletingFromFavoritesMessage] =
@@ -217,25 +234,6 @@ export function Product({ data }) {
     context.setCount(context.count + 1);
     context.setCartProducts([...context.cartProducts, productToAdd]);
     showAlert(productToAdd.title);
-  };
-  //adding products to favorites
-  const addProductToFavorites = (productToAdd) => {
-    context.setFavorites([...context.favorites, productToAdd]);
-    showAddingToFavoritesAlert(
-      productToAdd.title,
-      "ha sido agregado a favoritos."
-    );
-  };
-  //deleting products from favorites
-  const deleteFromFavorites = (productToDelete) => {
-    const filteredFavorites = context.favorites.filter(
-      (product) => product.id !== productToDelete.id
-    );
-    context.setFavorites(filteredFavorites);
-    showDeletingFromFavoritesAlert(
-      productToDelete.title,
-      "ha sido eliminado de favoritos."
-    );
   };
 
   return (
