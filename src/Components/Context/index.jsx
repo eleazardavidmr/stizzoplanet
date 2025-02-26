@@ -7,6 +7,16 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
+      id: 14,
+      img: ["/img/products/puma-palermo.png"],
+      title: "Puma Palermo",
+      desc: "Puma Palermo🐆☑️ Haz tu pedido por medio de nuestro whatsapp 📲",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+      new: true,
+    },
+    {
       id: 13,
       img: [
         "img/products/airMax/airMax-black-and-white.png",
@@ -63,7 +73,7 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: ["dama", "caballero"],
-      new: true,
+      new: false,
     },
     {
       id: 8,
