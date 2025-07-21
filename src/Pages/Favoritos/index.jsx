@@ -6,6 +6,7 @@ import { Product } from "../../Components/Products/Product";
 import { OrderCheck } from "../../Components/OrderCheck";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { AnimatePresence } from "framer-motion";
+import ReturnHomeButton from "../../Components/ReturnHomeButton";
 export default function Favoritos() {
   const context = useContext(ProductContext);
   return (
@@ -24,12 +25,17 @@ export default function Favoritos() {
               </span>
             </h1>
           ) : (
-            <h1 className="text-2xl font-extrabold text-center mb-5 md:text-left">
-              No tienes productos favoritos de{" "}
-              <span className="underline underline-offset-3 decoration-5 decoration-primary">
-                Stizzo Planet
+            <div className="flex items-center flex-col md:flex-row md:justify-between justify-center gap-5 md:gap-0">
+              <div className="text-2xl font-extrabold text-center  md:text-left">
+                No tienes productos favoritos de{" "}
+                <span className="underline underline-offset-3 decoration-5 decoration-primary">
+                  Stizzo Planet
+                </span>
+              </div>
+              <span>
+                <ReturnHomeButton to="/" />
               </span>
-            </h1>
+            </div>
           )}
 
           <div className="flex flex-wrap gap-3 w-full">

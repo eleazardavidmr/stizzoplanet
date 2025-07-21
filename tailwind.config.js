@@ -6,6 +6,7 @@
         primary: "#a50d3e",
         "primary-light": "#ca3535",
         secondary: "#1d63a1",
+        background: "#0c2c47",
       },
     },
   },

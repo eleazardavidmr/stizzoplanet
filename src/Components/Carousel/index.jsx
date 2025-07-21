@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import PropTypes from "prop-types";
+import { ProductContext } from "../Context";
 export default function Carousel({
   children: slides,
   autoSlide = false,
   autoSlideInterval = 3000,
-  className = "overflow-hidden relative mx-auto cursor-pointer mb-5 w-[50%] ",
+  data,
+  className = "overflow-hidden relative mx-5 cursor-pointer mb-5 w-[50%]",
 }) {
   const [curr, setCurr] = useState(0);
 
@@ -18,19 +20,25 @@ export default function Carousel({
     const slideInterval = setInterval(next, autoSlideInterval);
     return () => clearInterval(slideInterval);
   }, []);
+
+  const context = useContext(ProductContext);
+  const showProduct = () => {
+    context.openProductDetail();
+    context.setProductToShow(data);
+  };
   return (
     <div className={className}>
       <div
-        className="flex transition-transform ease-out duration-500 "
+        className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         {slides}
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-between p-4">
+      <div className="absolute inset-0 flex items-center justify-between z-10">
         <button
           onClick={prev}
-          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40"
+          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40 z-20"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,9 +56,10 @@ export default function Carousel({
             <path d="M15 6l-6 6l6 6" />
           </svg>
         </button>
+
         <button
           onClick={next}
-          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40"
+          className="p-1 rounded-full shadow bg-white/20 hover:bg-white/40 z-20"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,3 +95,10 @@ export default function Carousel({
     </div>
   );
 }
+
+Carousel.propTypes = {
+  children: PropTypes.node.isRequired,
+  autoSlide: PropTypes.bool,
+  autoSlideInterval: PropTypes.number,
+  data: PropTypes.object, // Update:
+};

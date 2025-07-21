@@ -2,12 +2,15 @@ import PropTypes from "prop-types";
 import { ProductContext } from "../../Context";
 import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Carousel from "../../Carousel";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import InfoIcon from "../../../Icons/InfoIcon";
 
 export function Product({ data }) {
+  const buttonAnimation = {
+    whileHover: { scale: 1.05 },
+    whileTap: { scale: 0.8 },
+  };
   const context = useContext(ProductContext);
 
   //adding products to favorites
@@ -57,14 +60,15 @@ export function Product({ data }) {
   };
 
   //rendering
-  const renderIcons = (id) => {
+  const renderCart = (id) => {
     const isInCart = context.cartProducts.some((product) => product.id === id);
 
     if (isInCart) {
       return (
-        <button
+        <motion.button
+          {...buttonAnimation}
           type="button"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,14 +88,15 @@ export function Product({ data }) {
             <path d="M6 5l14 1l-1 7h-13" />
             <path d="M15 19l2 2l4 -4" />
           </svg>
-        </button>
+        </motion.button>
       );
     } else {
       return (
-        <button
+        <motion.button
+          {...buttonAnimation}
           onClick={() => addProductsToCart(data)}
           type="button"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +117,7 @@ export function Product({ data }) {
             <path d="M16 19h6" />
             <path d="M19 16v6" />
           </svg>
-        </button>
+        </motion.button>
       );
     }
   };
@@ -141,35 +146,6 @@ export function Product({ data }) {
       );
     } else {
       return categoryElements[category];
-    }
-  };
-
-  const renderProductImage = (img) => {
-    if (img.length === 1) {
-      return (
-        <motion.img
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="w-full cursor-pointer aspect-[500/500] product-image"
-          src={img[0]}
-          alt={data.title}
-        />
-      );
-    } else if (img.length > 1) {
-      return (
-        <Carousel className="overflow-hidden -z-50 relative mx-auto cursor-pointer mb-5 w-full">
-          {img.map((image, index) => (
-            <motion.img
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              key={index}
-              className="w-full cursor-pointer aspect-[500/500] product-image"
-              src={image}
-              alt={data.title}
-            />
-          ))}
-        </Carousel>
-      );
     }
   };
 
@@ -304,63 +280,72 @@ export function Product({ data }) {
       )}
 
       <AnimatePresence>
-        <motion.div className="product rounded-xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between">
+        <motion.div className="product rounded-3xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between">
           <div className="flex mx-auto items-center justify-between w-[90%] transition-all mt-3 text-white/60">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.8 }}
-              onClick={() => showProduct()}
-              className=""
-            >
-              <InfoIcon />
-            </motion.button>
             {renderLikeButton(data.id)}
           </div>
-          {renderProductImage(data.img)}
-          <div className="flex p-5 items-center justify-between mx-auto w-full dark:border-gray-700 bg-blue-950 dark:bg-[#101f2e] rounded-b-lg">
-            <div className="flex flex-col">
-              <span className="mb-2 gap-1 flex ">
-                {renderCategoryIcons(data.category)}
-              </span>
-              <div className="flex items-left justify-center gap-1 flex-col">
-                <span className="text-md font-regular text-gray-400">
-                  {data.title}
+          <motion.img
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="w-full cursor-pointer aspect-[500/500] product-image"
+            alt={data.title}
+            src={data.img[0]}
+          />
+          <section className="flex p-5 items-center justify-between mx-auto w-full border dark:border-white/10 backdrop-blur-2xl rounded-3xl">
+            <div className="flex items-center justify-between w-full">
+              <section className="flex flex-col w-[50%]">
+                <span className="mb-2 gap-1 flex ">
+                  {renderCategoryIcons(data.category)}
                 </span>
-                <span className="text-3xl font-bold text-white">
-                  ${data.price}
-                </span>
-              </div>
-            </div>
+                <div className="flex items-left justify-center gap-1 flex-col">
+                  <span className="text-md font-regular text-gray-400">
+                    {data.title}
+                  </span>
+                  <span className="text-3xl font-bold text-white">
+                    ${data.price}
+                  </span>
+                </div>
+              </section>
 
-            <div className="flex items-center gap-2 justify-between flex-col">
-              <span className="flex items-center justify-between ">
-                <a
-                  href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${data.title}`}
-                  target="_blank"
+              <section className="w-[40%] h-full gap-2 flex items-center flex-col justify-between">
+                <span className="flex items-center justify-between w-full">
+                  <motion.a
+                    {...buttonAnimation}
+                    href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${data.title}`}
+                    target="_blank"
+                    type="button"
+                    className="text-white text-xs bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-5 py-2.5 text-center  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  >
+                    Comprar
+                  </motion.a>
+
+                  {renderCart(data.id)}
+                </span>
+                <motion.button
+                  {...buttonAnimation}
                   type="button"
-                  className="text-white text-xs bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-3xl text-xs transition-all px-5 py-2.5 text-center w-full"
+                  onClick={showProduct}
                 >
-                  Comprar
-                </a>
-
-                {renderIcons(data.id)}
-              </span>
+                  Más información
+                </motion.button>
+              </section>
             </div>
-          </div>
+          </section>
         </motion.div>
       </AnimatePresence>
     </>
   );
 }
-
 Product.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     category: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]).isRequired,
+    img: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };

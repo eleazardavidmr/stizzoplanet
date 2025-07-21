@@ -161,7 +161,7 @@ export function Navbar() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className="top-[20vh] w-screen  h-80 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
+            className="top-[20vh] w-screen h-80 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
           >
             <NavLink
               to="/favoritos"

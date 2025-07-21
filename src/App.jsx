@@ -1,6 +1,5 @@
 import "./App.css";
 import FilterNav from "./Components/FilterNav";
-import { Footer } from "./Components/Footer";
 import { Hero } from "./Components/Hero";
 import { Navbar } from "./Components/Navbar";
 import { NoiseBackground } from "./Components/NoiseBackground";
@@ -12,13 +11,11 @@ function App() {
     <>
       <OrderCheck />
       <ProductDetail />
-      {/* NoiseBackground, Navbar, Hero, Products, Footer */}
       <NoiseBackground />
       <Navbar />
       <Hero />
       <FilterNav />
       <Products />
-      <Footer />
     </>
   );
 }

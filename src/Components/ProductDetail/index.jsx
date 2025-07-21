@@ -127,7 +127,7 @@ export function ProductDetail() {
       );
     } else if (product.img.length > 1) {
       return (
-        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 md:w-[50%] w-[90%] -z-50">
+        <Carousel className="overflow-hidden relative mx-auto cursor-pointer mb-5 md:w-[50%] w-[90%]">
           {product.img.map((image, index) => (
             <motion.img
               key={index}
@@ -139,17 +139,6 @@ export function ProductDetail() {
         </Carousel>
       );
     }
-  };
-
-  const BuyButton = ({ content }) => {
-    return (
-      <button
-        type="button"
-        className="p-2 w-12 h-12 flex items-center justify-center text-sm font-medium  focus:outline-none text-white/60 rounded-full  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-      >
-        {content}
-      </button>
-    );
   };
 
   const renderLikeButton = (id) => {
