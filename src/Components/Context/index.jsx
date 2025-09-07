@@ -7,6 +7,34 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
     {
+      id: 16,
+      img: [
+        "/img/products/asics/asics-black.png",
+        "/img/products/asics/asics-gray.png",
+        "/img/products/asics/asics-white.png",
+      ],
+      title: "Asics",
+      desc: "Nuevas Asics🦦🔥 Disponible aquí en @stizzoplanet 🪐Con domicilio GRATIS en Cali y envíos a todo colombia 🇨🇴✅💎",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+      new: true,
+    },
+    {
+      id: 15,
+      img: [
+        "/img/products/vansKnuSkool/vansKnuSkool-animalprint.png",
+        "/img/products/vansKnuSkool/vansKnuSkool-red.png",
+        "/img/products/vansKnuSkool/vansKnuSkool-pink.png",
+      ],
+      title: "Vans Knu Skool",
+      desc: "Vans Knu Skool〽️🛹. Escríbenos por medio de WhatsApp y haz tu pedido, link en el perfil 📲",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "dama",
+      new: true,
+    },
+    {
       id: 14,
       img: ["/img/products/puma-palermo.png"],
       title: "Puma Palermo",
@@ -14,7 +42,7 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: "caballero",
-      new: true,
+      new: false,
     },
     {
       id: 13,
@@ -30,7 +58,7 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: "caballero",
-      new: true,
+      new: false,
     },
     {
       id: 12,
@@ -40,7 +68,7 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: "dama",
-      new: true,
+      new: false,
     },
     {
       id: 11,
@@ -50,7 +78,7 @@ export const ProductProvider = ({ children }) => {
       sizes: [44, 42, 40],
       price: 999,
       category: "dama",
-      new: true,
+      new: false,
     },
     {
       id: 10,
