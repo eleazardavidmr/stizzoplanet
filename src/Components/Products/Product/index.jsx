@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./styles.css";
-import InfoIcon from "../../../Icons/InfoIcon";
 
 export function Product({ data }) {
   const buttonAnimation = {
@@ -30,6 +29,16 @@ export function Product({ data }) {
     );
   };
 
+  const handleDeleteFromCart = (id, productTitle) => {
+    const filteredProducts = context.cartProducts.filter(
+      (product) => product.id !== id
+    );
+    context.setCartProducts(filteredProducts);
+    context.setCount(context.count - 1);
+    showDeletingFromCartMessage(productTitle, "ha sido eliminado del carrito.");
+    console.log(productTitle);
+  };
+
   //alerts states
   const [alertMessage, setAlertMessage] = useState(null);
   const [deletingFromFavoritesMessage, setDeletingFromFavoritesMessage] =
@@ -37,6 +46,7 @@ export function Product({ data }) {
   const [addingToFavoritesMessage, setAddingToFavoritesMessage] =
     useState(null);
 
+  const [deletingFromCartMessage, setDeletingFromCartMessage] = useState(null);
   //alerts functions
   const showDeletingFromFavoritesAlert = (productTitle, message) => {
     setDeletingFromFavoritesMessage(productTitle + " " + message);
@@ -51,6 +61,10 @@ export function Product({ data }) {
   const showAlert = (productTitle) => {
     setAlertMessage(productTitle + " ");
     setTimeout(() => setAlertMessage(null), 5000);
+  };
+  const showDeletingFromCartMessage = (productTitle, message) => {
+    setDeletingFromCartMessage(productTitle + " " + message);
+    setTimeout(() => setDeletingFromCartMessage(null), 3000);
   };
 
   //showing product
@@ -69,6 +83,7 @@ export function Product({ data }) {
           {...buttonAnimation}
           type="button"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={() => handleDeleteFromCart(id, data.title)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -279,6 +294,33 @@ export function Product({ data }) {
         </motion.div>
       )}
 
+      {deletingFromCartMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.9 }}
+          className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+          role="alert"
+        >
+          <Link to="/favoritos">
+            <div className="flex items-center justify-center gap-1 text-right">
+              <svg
+                className="flex-shrink-0 inline w-4 h-4 me-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+              <span className="font-semibold">{deletingFromCartMessage}</span>
+            </div>
+          </Link>
+        </motion.div>
+      )}
+
       <AnimatePresence>
         <motion.div className="product rounded-3xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between">
           <div className="flex mx-auto items-center justify-between w-[90%] transition-all mt-3 text-white/60">
@@ -291,7 +333,7 @@ export function Product({ data }) {
             alt={data.title}
             src={data.img[0]}
           />
-          <section className="flex p-5 items-center justify-between mx-auto w-full border dark:border-white/10 backdrop-blur-2xl rounded-3xl">
+          <section className="flex p-5 items-center justify-between mx-auto w-full border border-white/10 backdrop-blur-2xl rounded-3xl">
             <div className="flex items-center justify-between w-full">
               <section className="flex flex-col w-[50%]">
                 <span className="mb-2 gap-1 flex ">
