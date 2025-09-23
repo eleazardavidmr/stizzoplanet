@@ -16,7 +16,7 @@ export const ProductProvider = ({ children }) => {
       title: "Asics",
       desc: "Nuevas Asics🦦🔥 Disponible aquí en @stizzoplanet 🪐Con domicilio GRATIS en Cali y envíos a todo colombia 🇨🇴✅💎",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 320000,
       category: "caballero",
       new: true,
     },
@@ -30,7 +30,7 @@ export const ProductProvider = ({ children }) => {
       title: "Vans Knu Skool",
       desc: "Vans Knu Skool〽️🛹. Escríbenos por medio de WhatsApp y haz tu pedido, link en el perfil 📲",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 280000,
       category: "dama",
       new: true,
     },
@@ -40,7 +40,7 @@ export const ProductProvider = ({ children }) => {
       title: "Puma Palermo",
       desc: "Puma Palermo🐆☑️ Haz tu pedido por medio de nuestro whatsapp 📲",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 250000,
       category: "caballero",
       new: false,
     },
@@ -56,7 +56,7 @@ export const ProductProvider = ({ children }) => {
       title: "Air Max",
       desc: "Nuevo modelo disponible 🌪️👌🏻 Mira todos los colores disponibles en nuestro catálogo, link en el perfil📲",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 300000,
       category: "caballero",
       new: false,
     },
@@ -66,7 +66,7 @@ export const ProductProvider = ({ children }) => {
       title: "New Balance 1906",
       desc: "New 1906😎🔥Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 295000,
       category: "dama",
       new: false,
     },
@@ -76,7 +76,7 @@ export const ProductProvider = ({ children }) => {
       title: "Adidas Samba",
       desc: "¿Qué tal estas nuevas samba?👀❤️💘 ¡Escríbenos y agenda tu pedido!🚚",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 270000,
       category: "dama",
       new: false,
     },
@@ -89,7 +89,7 @@ export const ProductProvider = ({ children }) => {
       title: "Air Max 95",
       desc: "Air Max 95❇️ Un modelo muy clásico〽️ Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 310000,
       category: "caballero",
       new: false,
     },
@@ -99,7 +99,7 @@ export const ProductProvider = ({ children }) => {
       title: "Adidas X Bad Bunny",
       desc: "Ad/das Response x Bad Bunny🔥 Todos los colores disponibles, escríbenos y haz tu pedido📲✔️",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 350000,
       category: ["dama", "caballero"],
       new: false,
     },
@@ -112,7 +112,7 @@ export const ProductProvider = ({ children }) => {
       title: "Rebook",
       desc: "REE🅱️OK🫡 Disponible aquí en @stizzoplanet 🪐Con domicilio GRATIS en Cali y envíos a todo colombia 🇨🇴✅💎",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 220000,
       category: "caballero",
       new: false,
     },
@@ -122,7 +122,7 @@ export const ProductProvider = ({ children }) => {
       title: "New Balance 530",
       desc: "New 530🫧💨 ¿Qué tal este color?😮‍💨😮‍💨 Haz tu pedido por medio de WhatsApp, link en el perfil 📲",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 290000,
       category: "dama",
       new: true,
     },
@@ -136,7 +136,7 @@ export const ProductProvider = ({ children }) => {
       title: "Off White",
       desc: "Nuevas OFF White❕🧔🏽‍♂️ Mira nuestro catálogo, link en historias destacadas📲",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 330000,
       category: "caballero",
       new: false,
     },
@@ -146,7 +146,7 @@ export const ProductProvider = ({ children }) => {
       title: "Nike Zoom",
       desc: "Nike Zoom🔥 Un modelo que no puede faltar en tu colección👟 Disponible para hombre📍",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 260000,
       category: "caballero",
       new: false,
     },
@@ -156,7 +156,7 @@ export const ProductProvider = ({ children }) => {
       title: "Reebook",
       desc: "Un modelo clásico que no puede faltar🔝 Disponible para hombre y dama aquí en @stizzoplanet_ 🤩",
       sizes: [44, 42, 40],
-      price: 999,
+      price: 210000,
       category: "dama",
       new: false,
     },
@@ -166,7 +166,7 @@ export const ProductProvider = ({ children }) => {
       title: "New B 327",
       desc: "New B 327👨🏻☄️Tenemos variedad de colores☑️ Haz tu pedido por medio de WhatsApp, link en el perfil 📲",
       sizes: [44, 42, 41],
-      price: 999,
+      price: 240000,
       category: "caballero",
       new: false,
     },
@@ -176,7 +176,7 @@ export const ProductProvider = ({ children }) => {
       title: "Air Max 97",
       desc: "Air Max 97💨 Un modelo que no pasa de moda🔥 Recuerda que hacemos domicilios GRATIS en Cali📍y envíos nacionales a todo el país 🇨🇴",
       sizes: [30, 39, 44],
-      price: 999,
+      price: 315000,
       category: "caballero",
       new: false,
     },
@@ -186,7 +186,7 @@ export const ProductProvider = ({ children }) => {
       title: "Nike V2K",
       desc: "N🔝KE V2K✔️ De nuevo disponible para hombre y dama 🤩 Haz tu pedido y te lo entregamos con domi gratis en Cali📍",
       sizes: [44, 42, 43],
-      price: 999,
+      price: 275000,
       category: "dama",
       new: false,
     },
@@ -208,6 +208,11 @@ export const ProductProvider = ({ children }) => {
   const openOrderCheck = () => setIsOrderCheckOpen(true);
   const closeOrderCheck = () => setIsOrderCheckOpen(false);
 
+  //payment
+  const [isPaymentConfirmOpen, setIsPaymentConfirmOpen] = useState(false);
+  const openPaymentConfirm = () => setIsPaymentConfirmOpen(true);
+  const closePaymentConfirm = () => setIsPaymentConfirmOpen(true);
+
   //cart count
   const [count, setCount] = useState(0);
 
@@ -226,6 +231,8 @@ export const ProductProvider = ({ children }) => {
 
   const [favorites, setFavorites] = useState([]);
   const [isInFavorites, setIsInFavorites] = useState();
+  const [cartTotal, setCartTotal] = useState(0);
+
   // Load favorites from localStorage on component mount
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -276,6 +283,12 @@ export const ProductProvider = ({ children }) => {
         setIsInFavorites,
         addToFavorites,
         removeFromFavorites,
+        cartTotal,
+        setCartTotal,
+        isPaymentConfirmOpen,
+        setIsPaymentConfirmOpen,
+        openPaymentConfirm,
+        closePaymentConfirm,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import BuyButton from "../../BuyButton";
 
 export function Product({ data }) {
   const buttonAnimation = {
@@ -344,23 +345,14 @@ export function Product({ data }) {
                     {data.title}
                   </span>
                   <span className="text-3xl font-bold text-white">
-                    ${data.price}
+                    ${data.price.toLocaleString("es-CO")}
                   </span>
                 </div>
               </section>
 
               <section className="w-[40%] h-full gap-2 flex items-center flex-col justify-between">
                 <span className="flex items-center justify-between w-full">
-                  <motion.a
-                    {...buttonAnimation}
-                    href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${data.title}`}
-                    target="_blank"
-                    type="button"
-                    className="text-white text-xs bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full px-5 py-2.5 text-center  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                  >
-                    Comprar
-                  </motion.a>
-
+                  <BuyButton productsToPay={[data]} />
                   {renderCart(data.id)}
                 </span>
                 <motion.button
