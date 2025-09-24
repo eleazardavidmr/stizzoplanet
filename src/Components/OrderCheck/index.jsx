@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import Carousel from "../Carousel";
-import PayUForm from "../PayUForm";
-import BuyButton from "../BuyButton";
+import BuyButton from "../PaymentGateway/BuyButton";
+import { totalPrice } from "../../Utils";
 
 export function OrderCheck() {
   const context = useContext(ProductContext);
@@ -16,6 +16,10 @@ export function OrderCheck() {
     context.setCartProducts(filteredProducts);
     context.setCount(context.count - 1);
   };
+  console.log(context.cartProducts);
+
+  // calcular total del carrito
+  const cartTotal = Number(totalPrice(context.cartProducts || [])) || 0;
 
   const renderProductImage = (product) => {
     if (product.img.length === 1) {
@@ -147,9 +151,7 @@ export function OrderCheck() {
               {context.cartProducts.length > 0 ? (
                 <div className="sticky bottom-0 left-0 w-full flex items-center justify-center bg-slate-900 p-5">
                   <div className="w-full flex items-center justify-between ">
-                    <p>{`Total: $${context.cartTotal.toLocaleString(
-                      "es-CO"
-                    )}`}</p>
+                    <p>{`Total: $${cartTotal.toLocaleString("es-CO")}`}</p>
                     <BuyButton productsToPay={context.cartProducts} />
                   </div>
                 </div>

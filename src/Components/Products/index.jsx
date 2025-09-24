@@ -1,6 +1,7 @@
 import { Product } from "./Product";
 import { ProductContext } from "../Context";
 import { useContext } from "react";
+import PaymentConfirm from "../PaymentGateway/PaymentConfirm";
 export function Products() {
   const context = useContext(ProductContext);
   const renderCategoryTitle = () => {
@@ -36,11 +37,14 @@ export function Products() {
           </mark>{" "}
           {renderCategoryTitle()}
         </h1>
-        <div className="flex items-center justify-center flex-col gap-4 lg:flex-row flex-wrap">
+        <div className="flex items-center justify-center gap-4 lg:flex-row flex-wrap">
           {context.filteredProducts.map((product) => {
             return <Product key={product.title} data={product} />;
           })}
         </div>
+        {context.isPaymentConfirmOpen && context.productsToPay && (
+          <PaymentConfirm products={[context.productToPay]} />
+        )}
       </div>
     </>
   );

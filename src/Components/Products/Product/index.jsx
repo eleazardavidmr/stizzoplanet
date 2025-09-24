@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./styles.css";
-import BuyButton from "../../BuyButton";
+import BuyButton from "../../PaymentGateway/BuyButton";
 
 export function Product({ data }) {
   const buttonAnimation = {
@@ -37,7 +37,6 @@ export function Product({ data }) {
     context.setCartProducts(filteredProducts);
     context.setCount(context.count - 1);
     showDeletingFromCartMessage(productTitle, "ha sido eliminado del carrito.");
-    console.log(productTitle);
   };
 
   //alerts states

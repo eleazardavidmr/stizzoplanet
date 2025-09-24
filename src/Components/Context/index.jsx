@@ -209,9 +209,20 @@ export const ProductProvider = ({ children }) => {
   const closeOrderCheck = () => setIsOrderCheckOpen(false);
 
   //payment
+  const [productsToPay, setProductsToPay] = useState([]); // <- asegurarse array por defecto
   const [isPaymentConfirmOpen, setIsPaymentConfirmOpen] = useState(false);
-  const openPaymentConfirm = () => setIsPaymentConfirmOpen(true);
-  const closePaymentConfirm = () => setIsPaymentConfirmOpen(true);
+
+  const openPaymentConfirm = (products) => {
+    setProductsToPay(products);
+    setIsPaymentConfirmOpen(true);
+  };
+
+  const closePaymentConfirm = () => {
+    setIsPaymentConfirmOpen(false);
+    setProductsToPay([]); // limpiar al cerrar
+  };
+
+  const [formData, setFormData] = useState(null);
 
   //cart count
   const [count, setCount] = useState(0);
@@ -231,7 +242,6 @@ export const ProductProvider = ({ children }) => {
 
   const [favorites, setFavorites] = useState([]);
   const [isInFavorites, setIsInFavorites] = useState();
-  const [cartTotal, setCartTotal] = useState(0);
 
   // Load favorites from localStorage on component mount
   useEffect(() => {
@@ -283,12 +293,14 @@ export const ProductProvider = ({ children }) => {
         setIsInFavorites,
         addToFavorites,
         removeFromFavorites,
-        cartTotal,
-        setCartTotal,
         isPaymentConfirmOpen,
         setIsPaymentConfirmOpen,
         openPaymentConfirm,
         closePaymentConfirm,
+        productsToPay,
+        setProductsToPay,
+        formData,
+        setFormData,
       }}
     >
       {children}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { useContext } from "react";
-import { ProductContext } from "../Context";
-import { totalPrice } from "../../Utils";
+import { ProductContext } from "../../Context";
+import { totalPrice } from "../../../Utils";
 export default function Checkout() {
   const context = useContext(ProductContext);
   const [formData, setFormData] = useState(null);

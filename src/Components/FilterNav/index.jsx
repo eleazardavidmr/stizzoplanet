@@ -5,7 +5,10 @@ export default function FilterNav() {
   const context = useContext(ProductContext);
   return (
     <>
-      <section className="flex items-center justify-center mx-auto my-5">
+      <section
+        className="flex items-center justify-center mx-auto my-5"
+        id="products"
+      >
         <NavLink
           to="/dama"
           className={({ isActive }) => {

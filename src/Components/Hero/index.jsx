@@ -21,7 +21,7 @@ export function Hero() {
           </span>
           <button className="hero-button py-2.5 px-5 text-sm font-bold mt-3 bg-secondary hidden md:flex w-fit">
             <a
-              href="https://www.instagram.com/stizzoplanet_/"
+              href="#products"
               className="flex items-center justify-center gap-2"
             >
               Explorar

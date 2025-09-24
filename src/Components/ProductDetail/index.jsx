@@ -9,16 +9,31 @@ import { InstagramLogo } from "../../Icons/InstagramLogo";
 import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
 import { Link } from "react-router-dom";
 import InfoIcon from "../../Icons/InfoIcon";
+import BuyButton from "../PaymentGateway/BuyButton";
 export function ProductDetail() {
   const context = useContext(ProductContext);
 
   const [productAddedToCartMessage, setProductAddedToCartMessage] =
     useState(null);
 
+  const [deletingFromCartMessage, setDeletingFromCartMessage] = useState(null);
+
   const [deletingFromFavoritesMessage, setDeletingFromFavoritesMessage] =
     useState(null);
   const [addingToFavoritesMessage, setAddingToFavoritesMessage] =
     useState(null);
+  const handleDeleteFromCart = (id, productTitle) => {
+    const filteredProducts = context.cartProducts.filter(
+      (product) => product.id !== id
+    );
+    context.setCartProducts(filteredProducts);
+    context.setCount(context.count - 1);
+    showDeletingFromCartMessage(productTitle, "ha sido eliminado del carrito.");
+  };
+  const showDeletingFromCartMessage = (productTitle, message) => {
+    setDeletingFromCartMessage(productTitle + " " + message);
+    setTimeout(() => setDeletingFromCartMessage(null), 3000);
+  };
 
   const addProductsToCart = (productToAdd) => {
     context.setCount(context.count + 1);
@@ -63,6 +78,7 @@ export function ProductDetail() {
       return (
         <button
           type="button"
+          onClick={() => handleDeleteFromCart(id, context.productToShow.title)}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm p-2 text-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <svg
@@ -270,7 +286,7 @@ export function ProductDetail() {
                           {context.productToShow.title}
                         </p>
                         <p className="font-extrabold text-2xl">
-                          ${context.productToShow.price}
+                          ${context.productToShow.price.toLocaleString("es-CO")}
                         </p>
                       </span>
 
@@ -280,17 +296,12 @@ export function ProductDetail() {
                     </div>
                   </div>
                   <br />
-                  <div className="flex items-center justify-center gap-2 text-center text-white/60 md:text-left mb-5">
-                    <a
-                      href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${context.productToShow.title}`}
-                      target="_blank"
-                      type="button"
-                      className="text-white w-full bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    >
-                      Comprar
-                    </a>
-                    {renderCartIcons(context.productToShow.id)}
-                    {renderLikeButton(context.productToShow.id)}
+                  <div className="w-[90%] mx-auto flex items-center justify-between gap-2 text-center text-white/60 md:text-left mb-5">
+                    <BuyButton productsToPay={context.productToShow} />
+                    <div className="w-1/5 flex items-center justify-center gap-2">
+                      {renderCartIcons(context.productToShow.id)}
+                      {renderLikeButton(context.productToShow.id)}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -359,6 +370,32 @@ export function ProductDetail() {
                 <span className="font-semibold">
                   {deletingFromFavoritesMessage}
                 </span>
+              </div>
+            </Link>
+          </motion.div>
+        )}
+        {deletingFromCartMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            className="cursor-pointer fixed w-auto bottom-1 right-2 md:w-auto md:bottom-5 md:right-5 z-[9999999] flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+            role="alert"
+          >
+            <Link to="/favoritos">
+              <div className="flex items-center justify-center gap-1 text-right">
+                <svg
+                  className="flex-shrink-0 inline w-4 h-4 me-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span className="font-semibold">{deletingFromCartMessage}</span>
               </div>
             </Link>
           </motion.div>
