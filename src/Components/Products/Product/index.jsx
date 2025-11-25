@@ -322,18 +322,16 @@ export function Product({ data }) {
       )}
 
       <AnimatePresence>
-        <motion.div className="product rounded-3xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between">
+        <motion.div className="product rounded-3xl w-[90vw] md:w-[400px] lg:h-[600px] flex items-center flex-col justify-between  bg-background/50 dark:bg-product-background/90">
           <div className="flex mx-auto items-center justify-between w-[90%] transition-all mt-3 text-white/60">
             {renderLikeButton(data.id)}
           </div>
-          <motion.img
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="w-full cursor-pointer aspect-[500/500] product-image"
+          <img
+            className="w-full product-image"
             alt={data.title}
             src={data.img[0]}
           />
-          <section className="flex p-5 items-center justify-between mx-auto w-full border border-white/10 backdrop-blur-2xl rounded-3xl">
+          <article className="flex p-5 items-center justify-between mx-auto w-full border border-white/10  rounded-3xl shadow-xl">
             <div className="flex items-center justify-between w-full">
               <section className="flex flex-col w-[50%]">
                 <span className="mb-2 gap-1 flex ">
@@ -373,7 +371,7 @@ export function Product({ data }) {
                 </motion.button>
               </section>
             </div>
-          </section>
+          </article>
         </motion.div>
       </AnimatePresence>
     </>

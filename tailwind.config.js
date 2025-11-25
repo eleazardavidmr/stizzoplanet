@@ -7,6 +7,7 @@
         "primary-light": "#ca3535",
         secondary: "#1d63a1",
         background: "#0c2c47",
+        "product-background": "#173351",
       },
     },
   },

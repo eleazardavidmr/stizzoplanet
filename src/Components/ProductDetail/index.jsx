@@ -225,9 +225,9 @@ export function ProductDetail() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden  z-[99] w-[90vw] h-[90vh] rounded-lg  mx-auto overflow-auto md:w-[90vw] md:left-[4%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto]"
+            className="product-detail cursor-pointer flex flex-col fixed top-[5%] left-3 overflow-x-hidden  z-[99] w-[90vw] h-[90vh] rounded-lg  mx-auto overflow-auto md:w-[90vw] md:left-[4%] md:top-[15%] lg:w-[60vw] lg:left-[20%] lg:py-0 md:h-[auto] bg-background dark:bg-product-background"
           >
-            <div className="sticky backdrop-blur-[100px] bg-white/10 border-b border-white/10 x-[101]  md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
+            <div className="sticky  border-b border-white/10 x-[101]  md:px-8 top-0 flex items-center justify-between w-full p-5 lg:py-5 ">
               <span className="flex gap-2  justify-center items-center">
                 <span className="text-white/60">
                   <InfoIcon />

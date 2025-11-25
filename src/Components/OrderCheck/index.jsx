@@ -48,9 +48,9 @@ export function OrderCheck() {
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
             exit={{ x: "-100vw" }}
-            className="fixed w-[90vw] top-0 h-[100vh] md:w-[50vw] overflow-y-scroll lg:w-[30vw] flex flex-col order-check z-[999] "
+            className="fixed w-[90vw] top-0 h-[100vh] md:w-[50vw] overflow-y-scroll lg:w-[30vw] flex flex-col order-check z-[999] bg-background dark:bg-product-background"
           >
-            <div className="sticky bg-[#090F15] top-0 mb-5 flex items-center justify-between w-full p-5">
+            <div className="sticky top-0 mb-5 flex items-center justify-between w-full p-5">
               <h1 className="font-semibold text-2xl">Mi Carrito</h1>
               <motion.span
                 whileTap={{ scale: 0.8 }}

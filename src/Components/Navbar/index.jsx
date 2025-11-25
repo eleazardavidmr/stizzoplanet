@@ -32,7 +32,7 @@ export function Navbar() {
         whileInView={{ y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="nav-bar sticky top-4 backdrop-blur-[50px] z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
+        className="nav-bar sticky bg-background/90 top-4 z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
       >
         <div className="flex items-center justify-between w-full mx-auto md:justify-center">
           <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
@@ -161,7 +161,7 @@ export function Navbar() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
-            className="top-[20vh] w-screen h-80 z-[9999] backdrop-blur-2xl rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2"
+            className="top-[20vh] w-screen h-80 z-[9999]  rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2 bg-black/90"
           >
             <NavLink
               to="/favoritos"
