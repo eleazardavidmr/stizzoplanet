@@ -2,7 +2,7 @@ import "./App.css";
 import FilterNav from "./Components/FilterNav";
 import { Hero } from "./Components/Hero";
 import { Navbar } from "./Components/Navbar";
-import { NoiseBackground } from "./Components/NoiseBackground";
+import { AuroraBackground } from "./Components/AuroraBackground";
 import { OrderCheck } from "./Components/OrderCheck";
 import { ProductDetail } from "./Components/ProductDetail";
 import { Products } from "./Components/Products";
@@ -11,7 +11,7 @@ function App() {
     <>
       <OrderCheck />
       <ProductDetail />
-      <NoiseBackground />
+      <AuroraBackground />
       <Navbar />
       <Hero />
       <FilterNav />

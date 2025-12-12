@@ -1,4 +1,3 @@
-import { NoiseBackground } from "../../Components/NoiseBackground";
 import { Navbar } from "../../Components/Navbar";
 import { useContext } from "react";
 import { ProductContext } from "../../Components/Context";
@@ -7,12 +6,13 @@ import { OrderCheck } from "../../Components/OrderCheck";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { AnimatePresence } from "framer-motion";
 import ReturnHomeButton from "../../Components/ReturnHomeButton";
+import { AuroraBackground } from "../../Components/AuroraBackground";
 export default function Favoritos() {
   const context = useContext(ProductContext);
   return (
     <>
       <Navbar />
-      <NoiseBackground />
+      <AuroraBackground />
       <OrderCheck />
       <ProductDetail />
       <AnimatePresence>

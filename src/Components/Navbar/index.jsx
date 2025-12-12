@@ -1,19 +1,17 @@
-//app
+import "./styles.css";
 import logo from "/img/stizzo-letters.png";
 import { NavbarButton } from "./NavbarButton";
 import { ProductContext } from "../Context";
-import "./styles.css";
 
-//react
-import { useState, useContext } from "react";
+// React & Router
+import { useState, useContext, useEffect } from "react";
 import Hamburger from "hamburger-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
-//famer motion
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
+// Framer Motion
+import { AnimatePresence, motion } from "framer-motion";
 
-//logos
+// Icons
 import { InstagramLogo } from "../../Icons/InstagramLogo";
 import { WhatsAppLogo } from "../../Icons/WhatsAppLogo";
 import { TikTokLogo } from "../../Icons/TikTokLogo";
@@ -21,83 +19,90 @@ import { TikTokLogo } from "../../Icons/TikTokLogo";
 export function Navbar() {
   const context = useContext(ProductContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const handleToggle = (toggled) => {
-    setMenuOpen(toggled);
-  };
+  const location = useLocation();
+
+  // Cierra el menú automáticamente cuando cambia la ruta
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
+
+  // Bloquea el scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [menuOpen]);
 
   return (
     <>
-      <motion.div
-        initial={{ y: -100 }}
-        whileInView={{ y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="nav-bar sticky bg-background/90 top-4 z-50 flex items-center justify-between w-[90vw] md:w-fit rounded-xl mx-auto md:justify-center p-4"
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className="fixed top-4 left-0 right-0 z-50 mx-auto w-[95%] max-w-5xl"
       >
-        <div className="flex items-center justify-between w-full mx-auto md:justify-center">
-          <span className="md:hidden lg:hidden flex items-center justify-between w-[90%] mx-auto">
-            <Link to="/">
-              <img src={logo} alt="logo" className="w-[150px] drop-shadow-xl" />
-            </Link>
+        <div className="relative flex items-center justify-between px-4 py-2 bg-white/80 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-lg rounded-full">
+          {/* --- LOGO (Izquierda) --- */}
+          <Link to="/" className="flex-shrink-0 z-50">
+            <img
+              src={logo}
+              alt="Stizzo Logo"
+              className="w-28 md:w-32 object-contain drop-shadow-sm"
+            />
+          </Link>
 
-            <div className="flex items-center justify-between gap text-white/80">
-              <span className="">
-                <button
-                  type="button"
-                  className="relative inline-flex items-center p-2 text-sm font-medium "
-                  onClick={() => context.openOrderCheck()}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 17h-11v-14h-2" />
-                    <path d="M6 5l14 1l-1 7h-13" />
-                  </svg>
-                  <motion.div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                    {context.count}
-                  </motion.div>
-                </button>
-              </span>
-              <Hamburger
-                size={20}
-                label="show menu"
-                rounded
-                onToggle={handleToggle}
+          {/* --- DESKTOP MENU (Centro) --- */}
+          <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+            <NavLink
+              to="/favoritos"
+              className={({ isActive }) =>
+                `text-sm font-medium px-5 py-2 rounded-full transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary text-white shadow-md shadow-primary/30"
+                    : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-gray-100 dark:hover:bg-white/10"
+                }`
+              }
+            >
+              Favoritos
+            </NavLink>
+          </div>
+
+          {/* --- ACTIONS (Derecha) --- */}
+          <div className="flex items-center gap-2 md:gap-4 z-50">
+            {/* Iconos Sociales (Solo Desktop) */}
+            <div className="hidden md:flex items-center gap-2 border-r border-gray-300 pr-4 mr-2">
+              <SocialLink
+                href="https://www.instagram.com/stizzoplanet_/"
+                Icon={InstagramLogo}
+              />
+              <SocialLink
+                href="https://wa.me/573248600843"
+                Icon={WhatsAppLogo}
+              />
+              <SocialLink
+                href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
+                Icon={TikTokLogo}
               />
             </div>
-          </span>
 
-          <div className="hidden lg:flex md:flex items-center justify-center gap-10">
+            {/* Carrito de Compras */}
             <motion.button
-              whileHover={{ scale: 1.07 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => context.openOrderCheck()}
-              type="button"
-              className="relative inset-2 inline-flex items-center p-2 text-sm font-medium right-5 me-2 mb-2  hover:bg-primary text-white rounded-full"
+              className="relative p-2.5 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-primary hover:text-white transition-colors text-gray-700 dark:text-white group"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
+                width={20}
+                height={20}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -105,98 +110,139 @@ export function Navbar() {
                 <path d="M17 17h-11v-14h-2" />
                 <path d="M6 5l14 1l-1 7h-13" />
               </svg>
-              <motion.div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                {context.count}
-              </motion.div>
+
+              {context.count > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  key={context.count} // Reinicia animación al cambiar número
+                  className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white border-2 border-white dark:border-black"
+                >
+                  {context.count}
+                </motion.span>
+              )}
             </motion.button>
-            <div>
-              <NavLink
-                to="/favoritos"
-                className={({ isActive }) => {
-                  return isActive
-                    ? "text-xs px-4 py-1.5 transition-all md:px-5 md:py-2.5 text-center border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-                    : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center border-2 border-primary/60 hover:bg-primary text-white rounded-full";
-                }}
-              >
-                Favoritos
-              </NavLink>
-            </div>
 
-            <NavLink className="w-[150px] transition-all" to="/">
-              <motion.img
-                whileTap={{ scale: 0.8 }}
-                src={logo}
-                alt="logo"
-                className="w-full"
+            {/* Hamburger (Solo Móvil) */}
+            <div className="md:hidden text-gray-800 dark:text-white">
+              <Hamburger
+                toggled={menuOpen}
+                toggle={setMenuOpen}
+                size={20}
+                rounded
+                label="Menu"
               />
-            </NavLink>
-
-            <div className="flex items-center justify-center">
-              <a
-                href="https://www.instagram.com/stizzoplanet_/"
-                target="_blank"
-              >
-                <NavbarButton
-                  content={<InstagramLogo width={22} height={22} />}
-                />
-              </a>
-              <a href="https://wa.me/573248600843" target="_blank">
-                <NavbarButton
-                  content={<WhatsAppLogo width={22} height={22} />}
-                />
-              </a>
-              <a
-                href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
-                target="_blank"
-              >
-                <NavbarButton content={<TikTokLogo width={22} height={22} />} />
-              </a>
             </div>
           </div>
         </div>
-      </motion.div>
-      {menuOpen && (
-        <AnimatePresence>
+      </motion.nav>
+
+      {/* --- MOBILE FULLSCREEN MENU --- */}
+      <AnimatePresence>
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            className="top-[20vh] w-screen h-80 z-[9999]  rounded-md fixed mx-auto flex items-center justify-center flex-col gap-2 bg-black/90"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-40 bg-white/90 dark:bg-black/90 flex flex-col items-center justify-center"
           >
-            <NavLink
-              to="/favoritos"
-              className={({ isActive }) => {
-                return isActive
-                  ? "text-sm px-4 py-1.5  transition-all md:px-5 md:py-2.5 text-center text-[12px] border-2 bg-primary/60 border-primary/60 hover:bg-primary text-white rounded-full"
-                  : "text-sm px-4 py-1.5 md:px-5 md:py-2.5 text-center text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
+            <motion.div
+              className="flex flex-col items-center gap-8"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+                },
+                closed: {
+                  transition: { staggerChildren: 0.05, staggerDirection: -1 },
+                },
               }}
             >
-              Favoritos
-            </NavLink>
-            <div>
-              <a
-                href="https://www.instagram.com/stizzoplanet_/"
-                target="_blank"
-              >
-                <NavbarButton
-                  content={<InstagramLogo width={24} height={24} />}
-                />
-              </a>
-              <a href="https://wa.me/573248600843" target="_blank">
-                <NavbarButton
-                  content={<WhatsAppLogo width={24} height={24} />}
-                />
-              </a>
-              <a
-                href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
-                target="_blank"
-              >
-                <NavbarButton content={<TikTokLogo width={24} height={24} />} />
-              </a>
-            </div>
+              {/* Enlaces Móvil */}
+              <MobileMenuItem>
+                <NavLink
+                  to="/favoritos"
+                  className={({ isActive }) =>
+                    `text-2xl font-semibold tracking-tight ${
+                      isActive
+                        ? "text-primary"
+                        : "text-gray-800 dark:text-gray-200"
+                    }`
+                  }
+                >
+                  Favoritos
+                </NavLink>
+              </MobileMenuItem>
+
+              <MobileMenuItem>
+                <Link
+                  to="/"
+                  className="text-2xl font-semibold text-gray-800 dark:text-gray-200"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Inicio
+                </Link>
+              </MobileMenuItem>
+
+              {/* Separador */}
+              <motion.div
+                variants={itemVariants}
+                className="w-12 h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4"
+              />
+
+              {/* Redes Sociales Móvil */}
+              <MobileMenuItem>
+                <div className="flex gap-6">
+                  <SocialLink
+                    href="https://www.instagram.com/stizzoplanet_/"
+                    Icon={InstagramLogo}
+                    mobile
+                  />
+                  <SocialLink
+                    href="https://wa.me/573248600843"
+                    Icon={WhatsAppLogo}
+                    mobile
+                  />
+                  <SocialLink
+                    href="https://www.tiktok.com/@stizzoplanet_?_t=8sbIE8KdmW0&_r=1"
+                    Icon={TikTokLogo}
+                    mobile
+                  />
+                </div>
+              </MobileMenuItem>
+            </motion.div>
           </motion.div>
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
+
+// --- Componentes Auxiliares para limpiar el código ---
+
+const SocialLink = ({ href, Icon, mobile }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`transition-transform hover:scale-110 ${
+      mobile ? "p-2 bg-white dark:bg-white/10 rounded-full shadow-sm" : ""
+    }`}
+  >
+    <NavbarButton
+      content={<Icon width={mobile ? 28 : 20} height={mobile ? 28 : 20} />}
+    />
+  </a>
+);
+
+// Variantes de animación para items del menú
+const itemVariants = {
+  closed: { opacity: 0, y: 20 },
+  open: { opacity: 1, y: 0 },
+};
+
+const MobileMenuItem = ({ children }) => (
+  <motion.div variants={itemVariants}>{children}</motion.div>
+);
