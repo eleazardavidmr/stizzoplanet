@@ -150,7 +150,7 @@ export function Product({ data }) {
         initial="rest"
         whileHover="hover"
         variants={cardHover}
-        className="group relative flex flex-col w-[400px] bg-product-background rounded-2xl overflow-hidden border border-white/5 transition-colors duration-300 shadow-lg mx-auto"
+        className="group relative flex flex-col w-[400px] bg-product-background/50 rounded-2xl overflow-hidden border border-white/5 transition-colors duration-300 shadow-lg "
       >
         {/* --- IMAGEN Y FAVORITO --- */}
         <div
