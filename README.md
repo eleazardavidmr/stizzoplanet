@@ -1,8 +1,23 @@
-# React + Vite
+# Stizzo Planet 🪐👟
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Stizzo Planet is an e-commerce website built to showcase and sell shoes with a clean UI and product filtering.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
+- React.js
+- Vite
+- JavaScript
+- Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
+https://stizzoplanet.surge.sh
+
+## ⚙️ Run Locally
+
+### 1) Clone the repository
+```bash
+git clone https://github.com/amisha6870/stizzoplanet.git
+npm install
+npm run dev
+
+
+
