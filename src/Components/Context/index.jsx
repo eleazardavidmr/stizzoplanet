@@ -6,6 +6,36 @@ export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const PRODUCTS = [
+        {
+      id: 19,
+      img: ["/img/products/puma-palermo.png"],
+      title: "Puma Palermo (New Color)",
+      desc: "Nuevo color de Puma Palermo ✅ Disponible ahora en Stizzo Planet 🪐",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "caballero",
+      new: true,
+    },
+    {
+      id: 18,
+      img: ["/img/products/newBalance530.png"],
+      title: "New Balance 530 (Special Edition)",
+      desc: "Edición especial New Balance 530 💨 Escríbenos y agenda tu pedido 📲",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "dama",
+      new: true,
+    },
+    {
+      id: 17,
+      img: ["/img/products/adidasSamba.png"],
+      title: "Adidas Samba (Classic)",
+      desc: "Adidas Samba clásico 👟 Disponible para pedidos, link en el perfil 🚚",
+      sizes: [44, 42, 40],
+      price: 999,
+      category: "dama",
+      new: true,
+    },
     {
       id: 16,
       img: [
@@ -47,7 +77,7 @@ export const ProductProvider = ({ children }) => {
     {
       id: 13,
       img: [
-        "img/products/airMax/airMax-black-and-white.png",
+       "/img/products/airMax/airMax-black-and-white.png",
         "/img/products/airMax/airMax-green.png",
         "/img/products/airMax/airMax-blue.png",
         "/img/products/airMax/airMax-orange.png",
