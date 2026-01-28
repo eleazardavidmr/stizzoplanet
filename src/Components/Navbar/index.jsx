@@ -7,6 +7,7 @@ import { ProductContext } from "../Context";
 import { useState, useContext, useEffect } from "react";
 import Hamburger from "hamburger-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Framer Motion
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,9 +36,22 @@ export function Navbar() {
     }
   }, [menuOpen]);
 
+  // Cierra el menú con la tecla Escape
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [menuOpen]);
+
   return (
     <>
       <motion.nav
+        role="navigation"
+        aria-label="Navegación principal"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -91,6 +105,7 @@ export function Navbar() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => context.openOrderCheck()}
+              aria-label={`Carrito de compras, ${context.count} ${context.count === 1 ? "artículo" : "artículos"}`}
               className="relative p-2.5 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-primary hover:text-white transition-colors text-gray-700 dark:text-white group"
             >
               <svg
@@ -117,6 +132,8 @@ export function Navbar() {
                   animate={{ scale: 1 }}
                   key={context.count} // Reinicia animación al cambiar número
                   className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white border-2 border-white dark:border-black"
+                  aria-live="polite"
+                  aria-atomic="true"
                 >
                   {context.count}
                 </motion.span>
@@ -130,7 +147,9 @@ export function Navbar() {
                 toggle={setMenuOpen}
                 size={20}
                 rounded
-                label="Menu"
+                label="Abrir menú de navegación"
+                aria-label="Abrir menú de navegación"
+                aria-expanded={menuOpen}
               />
             </div>
           </div>
@@ -145,6 +164,9 @@ export function Navbar() {
             animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             className="fixed inset-0 z-40 bg-white/90 dark:bg-black/90 flex flex-col items-center justify-center"
+            role="dialog"
+            aria-label="Menú de navegación móvil"
+            aria-modal="true"
           >
             <motion.div
               className="flex flex-col items-center gap-8"
@@ -222,20 +244,36 @@ export function Navbar() {
 
 // --- Componentes Auxiliares para limpiar el código ---
 
-const SocialLink = ({ href, Icon, mobile }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`transition-transform hover:scale-110 ${
-      mobile ? "p-2 bg-white dark:bg-white/10 rounded-full shadow-sm" : ""
-    }`}
-  >
-    <NavbarButton
-      content={<Icon width={mobile ? 28 : 20} height={mobile ? 28 : 20} />}
-    />
-  </a>
-);
+const SocialLink = ({ href, Icon, mobile }) => {
+  const getAriaLabel = () => {
+    if (href.includes("instagram")) return "Visitar Instagram de Stizzo Planet";
+    if (href.includes("wa.me")) return "Contactar por WhatsApp";
+    if (href.includes("tiktok")) return "Visitar TikTok de Stizzo Planet";
+    return "Visitar red social";
+  };
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={getAriaLabel()}
+      className={`transition-transform hover:scale-110 ${
+        mobile ? "p-2 bg-white dark:bg-white/10 rounded-full shadow-sm" : ""
+      }`}
+    >
+      <NavbarButton
+        content={<Icon width={mobile ? 28 : 20} height={mobile ? 28 : 20} />}
+      />
+    </a>
+  );
+};
+
+SocialLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  Icon: PropTypes.elementType.isRequired,
+  mobile: PropTypes.bool,
+};
 
 // Variantes de animación para items del menú
 const itemVariants = {
@@ -246,3 +284,7 @@ const itemVariants = {
 const MobileMenuItem = ({ children }) => (
   <motion.div variants={itemVariants}>{children}</motion.div>
 );
+
+MobileMenuItem.propTypes = {
+  children: PropTypes.node.isRequired,
+};

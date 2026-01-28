@@ -1,0 +1,70 @@
+/* Accessibility Styles */
+
+/* Skip to main content link */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+  font-weight: 600;
+  transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Enhanced focus indicators for all interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Dark mode focus indicators */
+@media (prefers-color-scheme: dark) {
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline-color: #60a5fa;
+  }
+}
+
+/* Ensure focus is visible on navigation links */
+nav a:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 4px;
+}
+
+/* Focus for cards and interactive containers */
+article:focus-within {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Ensure sufficient contrast for focus states */
+*:focus-visible {
+  scroll-margin-top: 100px; /* Helps with skip links */
+}
+
+/* Remove default focus outline only when custom outline is applied */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Keyboard navigation helper - show focus on tab navigation */
+body:not(.user-is-tabbing) *:focus {
+  outline: none;
+}

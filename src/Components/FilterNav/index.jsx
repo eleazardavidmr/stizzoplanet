@@ -5,7 +5,11 @@ export default function FilterNav() {
   const context = useContext(ProductContext);
   return (
     <>
-      <section className="flex items-center justify-center mx-auto my-5">
+      <nav
+        className="flex items-center justify-center mx-auto my-5"
+        role="navigation"
+        aria-label="Filtros de productos"
+      >
         <NavLink
           to="/dama"
           className={({ isActive }) => {
@@ -14,6 +18,7 @@ export default function FilterNav() {
               : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center  me-2 mb-2 border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory("dama")}
+          aria-current={({ isActive }) => (isActive ? "page" : undefined)}
         >
           Dama
         </NavLink>
@@ -26,6 +31,7 @@ export default function FilterNav() {
               : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2 text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory(null)}
+          aria-current={({ isActive }) => (isActive ? "page" : undefined)}
         >
           Todos
         </NavLink>
@@ -37,10 +43,11 @@ export default function FilterNav() {
               : "text-xs px-4 py-1.5 md:px-5 md:py-2.5 text-center me-2 mb-2  text-[12px]  border-2 border-primary/60 hover:bg-primary text-white rounded-full";
           }}
           onClick={() => context.setSelectedCategory("caballero")}
+          aria-current={({ isActive }) => (isActive ? "page" : undefined)}
         >
           Caballero
         </NavLink>
-      </section>
+      </nav>
     </>
   );
 }

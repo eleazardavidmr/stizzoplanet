@@ -28,20 +28,22 @@ export function Products() {
   };
   return (
     <>
-      <div className="mb-5">
-        <h1 className="w-full text-3xl font-extrabold my-5 text-center text-white">
-          Échale un vistaso a lo nuevo de{" "}
-          <mark className="px-2 text-white rounded bg-primary">
-            Stizzo Planet
-          </mark>{" "}
-          {renderCategoryTitle()}
-        </h1>
-        <div className="flex items-center justify-center flex-col gap-4 lg:flex-row flex-wrap">
-          {context.filteredProducts.map((product) => {
-            return <Product key={product.title} data={product} />;
-          })}
+      <section aria-label="Lista de productos">
+        <div className="mb-5">
+          <h1 className="w-full text-3xl font-extrabold my-5 text-center text-white">
+            Échale un vistaso a lo nuevo de{" "}
+            <mark className="px-2 text-white rounded bg-primary">
+              Stizzo Planet
+            </mark>{" "}
+            {renderCategoryTitle()}
+          </h1>
+          <div className="flex items-center justify-center flex-col gap-4 lg:flex-row flex-wrap">
+            {context.filteredProducts.map((product) => {
+              return <Product key={product.title} data={product} />;
+            })}
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

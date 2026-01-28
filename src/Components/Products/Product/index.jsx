@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { ProductContext } from "../../Context";
 import { useContext, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import "./styles.css";
 
 // Iconos extraídos para limpiar el JSX
@@ -22,6 +21,10 @@ const HeartIcon = ({ filled }) => (
     <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
   </svg>
 );
+
+HeartIcon.propTypes = {
+  filled: PropTypes.bool.isRequired,
+};
 
 const CartPlusIcon = () => (
   <svg
@@ -167,6 +170,8 @@ export function Product({ data }) {
           <motion.button
             whileTap={buttonTap}
             onClick={toggleFavorite}
+            aria-label={`${context.favorites.some((p) => p.id === data.id) ? "Eliminar" : "Agregar"} ${data.title} ${context.favorites.some((p) => p.id === data.id) ? "de" : "a"} favoritos`}
+            aria-pressed={context.favorites.some((p) => p.id === data.id)}
             className={`absolute top-3 right-3 p-2 rounded-full shadow-lg backdrop-blur-md border transition-all ${
               context.favorites.some((p) => p.id === data.id)
                 ? "bg-primary text-white border-primary"
@@ -208,6 +213,7 @@ export function Product({ data }) {
             <motion.button
               whileTap={buttonTap}
               onClick={openDetail}
+              aria-label={`Ver detalles de ${data.title}`}
               className="px-4 py-2 rounded-xl text-xs font-bold text-white border border-white/20 hover:bg-white/5 transition-colors"
             >
               Ver Detalle
@@ -218,6 +224,8 @@ export function Product({ data }) {
               whileTap={buttonTap}
               href={`https://wa.me/573248600843?text=Hola!%20estoy%20interesad@%20en%20las%20${data.title}`}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Comprar ${data.title} por WhatsApp`}
               className="p-2 rounded-xl bg-[#25D366] text-white hover:bg-[#20bd5a] shadow-md flex items-center justify-center"
               title="Comprar por WhatsApp"
             >
@@ -242,6 +250,8 @@ export function Product({ data }) {
             <motion.button
               whileTap={buttonTap}
               onClick={toggleCart}
+              aria-label={`${context.cartProducts.some((p) => p.id === data.id) ? "Eliminar" : "Añadir"} ${data.title} ${context.cartProducts.some((p) => p.id === data.id) ? "del" : "al"} carrito`}
+              aria-pressed={context.cartProducts.some((p) => p.id === data.id)}
               className={`p-2 rounded-xl shadow-md flex items-center justify-center transition-colors ${
                 context.cartProducts.some((p) => p.id === data.id)
                   ? "bg-green-700 text-white border border-green-500" // Estado activo
@@ -266,12 +276,15 @@ export function Product({ data }) {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
             className={`fixed bottom-4 right-4 z-[999] flex items-center gap-3 px-4 py-3 rounded-lg shadow-2xl border backdrop-blur-md ${
               toast.type === "error"
                 ? "bg-red-900/90 border-red-500 text-white"
                 : toast.type === "secondary"
-                ? "bg-secondary/90 border-blue-400 text-white"
-                : "bg-primary/90 border-primary-light text-white"
+                  ? "bg-secondary/90 border-blue-400 text-white"
+                  : "bg-primary/90 border-primary-light text-white"
             }`}
           >
             <span className="text-sm font-semibold">{toast.message}</span>
