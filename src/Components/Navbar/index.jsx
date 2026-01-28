@@ -227,6 +227,7 @@ const SocialLink = ({ href, Icon, mobile }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label="link"
     className={`transition-transform hover:scale-110 ${
       mobile ? "p-2 bg-white dark:bg-white/10 rounded-full shadow-sm" : ""
     }`}
